@@ -1,0 +1,10 @@
+﻿  axe_game.cpp
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\axe_game.cpp(15,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\axe_game.cpp(16,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\axe_game.cpp(17,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\axe_game.cpp(18,19): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\axe_game.cpp(50,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\axe_game.cpp(51,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\axe_game.cpp(52,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\axe_game.cpp(53,32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Axe-Game.vcxproj -> C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\x64\Debug\Axe-Game.exe

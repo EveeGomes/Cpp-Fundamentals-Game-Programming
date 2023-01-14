@@ -1,0 +1,3 @@
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\x64\Debug\Axe-Game.vcxproj.CopyComplete
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\x64\Debug\Axe-Game.exe
+C:\Users\evepg\Documents\Udemy\C++ Fundamentals - Game Programming\Axe-Game\x64\Debug\raylib.dll
