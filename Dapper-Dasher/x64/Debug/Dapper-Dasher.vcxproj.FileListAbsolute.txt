@@ -1,0 +1,3 @@
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\x64\Debug\Dapper-Dasher.vcxproj.CopyComplete
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\x64\Debug\Dapper-Dasher.exe
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\x64\Debug\raylib.dll
