@@ -12,7 +12,6 @@ int main() {
    const int recWidth = 50;
    const int recHeight = 80;
    int posY = windowHeight - recHeight; // To have it positioned on the ground: bottom of the window = windowHeight - recHeight (bcz rectangles use the upper left corner for the coordinates)
-   //int velocity = -10; // negative so it moves upwards
    int velocity = 0;
 
    // set FPS to 60
@@ -24,14 +23,12 @@ int main() {
       BeginDrawing();
       ClearBackground(WHITE);
 
-      // update the rectangle's position:
-      //posY += velocity;
-
-      // using the above logic, implement JUMP action
+      // implement JUMP action
       if (IsKeyPressed(KEY_SPACE)) {
          velocity += -10;
          
       }
+      // update the rectangle's position
       posY += velocity;
 
       // now, draw the rectangle
