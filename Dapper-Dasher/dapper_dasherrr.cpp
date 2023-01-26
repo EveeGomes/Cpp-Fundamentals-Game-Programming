@@ -11,6 +11,11 @@ int main() {
    // acceleration due to gravity (pixels/frame) / frame
    const int gravity = 1;
 
+   // is the rectangle in the air?
+   bool isInAir = false;
+   // jump velocity
+   const int jumpVel = -22; // negative since negative directions means upwards!
+
    // rectangle dimensions
    const int recWidth = 50;
    const int recHeight = 80;
@@ -26,23 +31,22 @@ int main() {
       BeginDrawing();
       ClearBackground(WHITE);
 
-      // update the velocity by adding the acceleration due to gravity to it: velocity += gravity
-      // after that, update the y position!
-      // so:
-
-      // apply gravity, but before, add a ground check!
       if (posY >= windowHeight - recHeight) {
          // rectangle is on the ground; so we reset the velocity to 0
          velocity = 0;
+         isInAir = false; // is it needed?
       }
       else {
          // rectangle is in the air! So we need to apply gravity!
          velocity += gravity;
+         isInAir = true;
       }
 
       // implement JUMP action
-      if (IsKeyPressed(KEY_SPACE)) {
-         velocity -= 10;
+      if (IsKeyPressed(KEY_SPACE) && !isInAir) { // && !isInAir means only to jump if the character is on the ground; this way it prevents air jumping!
+         velocity += jumpVel;
+         // using a variable jumpVel instead of a hardcoded value is a better practice!
+         // also it becomes easier in case we need to change it
       }
 
       // update y position
