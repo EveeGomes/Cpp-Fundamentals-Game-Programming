@@ -23,7 +23,14 @@ int main() {
    scarfyPos.x = windowWidth / 2 - scarfyRec.width / 2;
    scarfyPos.y = windowHeight - scarfyRec.height;
 
+   // animation frame
+   int frame{};
+   // amount of time before we update the animation frame
+   const float updateTime = 1.0 / 12.0; // 1 12th of a second
+   float runningTime{};
+
    bool isInAir = false;
+
    // jump velocity
    const int jumpVel = -600; // pixels/s 
 
@@ -42,10 +49,9 @@ int main() {
 
       if (scarfyPos.y >= windowHeight - scarfyRec.height) {
          velocity = 0;
-         isInAir = false; // is it needed? -> yes! otherwise it'll keep the value of the else block and won't jump! :)
+         isInAir = false;
       }
       else {
-         // multiply by dT when applying gravity
          velocity += gravity * dT;
          isInAir = true;
       }
@@ -56,8 +62,21 @@ int main() {
       }
 
       // update y position
-      scarfyPos.y += velocity * dT; // multiply by dT when applying velocity
+      scarfyPos.y += velocity * dT;
       
+      // update runningTime
+      runningTime += dT; // add dT in each frame
+      if (runningTime >= updateTime) {
+         // update animation frame
+         runningTime = 0.0;
+         scarfyRec.x = frame * scarfyRec.width;
+         frame++;
+         // reset the frame when it reaches the last frame
+         if (frame > 5) {
+            frame = 0;
+         }
+      }
+
       // Draw the character
       DrawTextureRec(scarfy, scarfyRec, scarfyPos, WHITE);
       
