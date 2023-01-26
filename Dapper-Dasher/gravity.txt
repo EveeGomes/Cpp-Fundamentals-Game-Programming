@@ -1,0 +1,40 @@
+Gravity: downward force that pulls objects toward the ground
+- An object in free fall gravity imparts acceleration in the object
+
+-> acceleration: F = m*a (mass * acceleration)
+			   : change in velocity over time
+
+
+using gravity as a constant acceleration: g = 10(m/s)/s
+
+time = 0 (s)			after 1s, since the velocity is changing by 10 m/s /s , the acceleraiton due to gravity changes the velocity:
+velocity = 0 (m/s)		velocity = 10 (m/s)
+posY = 0 (m)			posY = 10m
+
+						after another second passed, time = 2s , as velocity is increasing by 10 m/s /s:
+						velocity = 20 (m/s)
+						posY = 30m
+
+						time = 3s
+						velocity = 30 (m/s)
+						posY = 60m
+
+						time = 4s
+						velocity = 40 m/s
+						posY = 100m -> the character falls off the grafic since 60 (in this example) is the maximum!!!
+
+- 0
+|
+- 10
+|
+|
+|
+- 30
+|
+|
+|
+|
+|
+|
+- 60
+y

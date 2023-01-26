@@ -8,6 +8,9 @@ int main() {
    // initialize the window
    InitWindow(windowWidth, windowHeight, "Dapper Dasher Game");
 
+   // acceleration due to gravity (pixels/frame) / frame
+   const int gravity = 1;
+
    // rectangle dimensions
    const int recWidth = 50;
    const int recHeight = 80;
@@ -15,7 +18,7 @@ int main() {
    int velocity = 0;
 
    // set FPS to 60
-   SetTargetFPS(60);
+   SetTargetFPS(10);
 
    // Game while loop
    while (!WindowShouldClose()) {
@@ -23,18 +26,32 @@ int main() {
       BeginDrawing();
       ClearBackground(WHITE);
 
+      // update the velocity by adding the acceleration due to gravity to it: velocity += gravity
+      // after that, update the y position!
+      // so:
+      
+      // apply gravity, but before, add a ground check!
+      if (posY >= windowHeight - recHeight) {
+         // rectangle is on the ground; so we reset the velocity to 0
+         velocity = 0;
+      }
+      else {
+         // rectangle is in the air! So we need to apply gravity!
+         velocity += gravity;
+      }
+
       // implement JUMP action
       if (IsKeyPressed(KEY_SPACE)) {
-         velocity += -10;
-         
+         velocity -= 10;
       }
-      // update the rectangle's position
+
+      // update y position
       posY += velocity;
 
       // now, draw the rectangle
       DrawRectangle(windowWidth / 2, posY, recWidth, recHeight, BLUE);
       
-      
+    
       EndDrawing();
    }
    // raylib function to close the window properly

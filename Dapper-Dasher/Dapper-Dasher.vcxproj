@@ -130,7 +130,8 @@
     <ClCompile Include="dapper_dasher.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="notes.txt" />
+    <Text Include="gravity.txt" />
+    <Text Include="velocity.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

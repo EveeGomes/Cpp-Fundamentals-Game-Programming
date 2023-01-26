@@ -1,4 +1,5 @@
 Velocity: speed in a certain direction = distance/time
+        : change in position over time!
 
 - it's normally measured as meters/second, but in a game we're working with pixels/frame:
 
@@ -28,11 +29,10 @@ posX = 20 (m)
 - so as he's moving in the negative x direction, we have: v = -10 (m/s)
 
 Therefore, the sign of the velocity is actually determining which direction it's moving!
-
 -> so, to think: if we have the velocity, how to change the position of something?
+
 - the window has a frequency of 60 FPS
 - the while loop executes EACH frame, therefore this is where we need to update the position!
-
 
 
 // 
