@@ -1,3 +1,5 @@
-﻿  dapper_dasherrr.cpp
-  LINK : C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\x64\Debug\Dapper-Dasher.exe not found or not built by the last incremental link; performing full link
+﻿  dapper_dasher.cpp
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(17,34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(18,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(49,30): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Dapper-Dasher.vcxproj -> C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\x64\Debug\Dapper-Dasher.exe

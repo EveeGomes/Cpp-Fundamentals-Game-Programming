@@ -127,9 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dapper_dasherrr.cpp" />
+    <ClCompile Include="dapper_dasher.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Delta-time.txt" />
     <Text Include="Gravity.txt" />
     <Text Include="Velocity.txt" />
   </ItemGroup>

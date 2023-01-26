@@ -1,0 +1,29 @@
+DeltaTime: time between frames
+- it's an important concept as frame time varies
+- it also helps on keeping movement consistent
+
+---> DeltaTime = time since last frame
+
+Although FPS is set using the SetTargetFPS() function, the value can't be guaranteed because it depends on the CPU.
+- processes can/will strain the CPU, and
+MORE strain = LOWER FPS
+
+- also, the relationshipt of FPS and DeltaTime:
+GREATER FPS = LOWER DeltaTime (ie, more frames in a given time)
+LOWER FPS   = GREATER DeltaTime
+
+- This way, to have a consistant movement while updating the character position, we should:
+multiply velocity by DeltaTime
+This allows the velocity to scale by DT and have the position updated by exactly the amount necessary to have a consistent
+rate of FPS set in the SetTargetFPS().
+This gives a movement that is independent of the frame rate!
+
+- By using gravity, velocity as frame/time, we can use this concept and get DT as following:
+GetFrameTime() function in Raylib returns the DeltaTime
+- velocity is pixel/frame, but we can have it pixel per time instead:
+so if we have 
+velocity = 60 (pixel/s), we could get the DeltaTime as:
+float dT = GetFrameTime();
+- then, to update the position:
+posY += velocity * dT;
+By multiplying the 
