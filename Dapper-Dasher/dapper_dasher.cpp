@@ -11,17 +11,28 @@ int main() {
    // acceleration due to gravity (pixels/s)/s
    const int gravity = 1'000;
 
-   // variables to pass to the draw texture function
+   // variables to pass to the draw texture function -> everytime we load a texture it needs to be unloaded at the end
+
+   // nebula variables
+   Texture2D nebula = LoadTexture("textures/12_nebula_spritesheet.png");
+   Rectangle nebRec{0.0, 0.0, nebula.width/8, nebula.height/8}; // it can be initialized like that using {} and commas, passing the values in the correct order
+   Vector2 nebPos{ windowWidth , windowHeight - nebRec.height };
+   
+   // nebula X velocity in (pixels/s) so we can use delta time to have this as frame independet
+   int nebVel = -600;
+
+   // scarfy variables
    Texture2D scarfy = LoadTexture("textures/scarfy.png");
-   Rectangle scarfyRec;
+   Rectangle scarfyRec{};
    scarfyRec.width = scarfy.width/6;
    scarfyRec.height = scarfy.height;
    scarfyRec.x = 0;
    scarfyRec.y = 0;
-
    Vector2 scarfyPos;
    scarfyPos.x = windowWidth / 2 - scarfyRec.width / 2;
    scarfyPos.y = windowHeight - scarfyRec.height;
+
+
 
    // animation frame
    int frame{};
@@ -61,29 +72,38 @@ int main() {
          velocity += jumpVel;
       }
 
-      // update y position
+      // update nebula's x position
+      nebPos.x += nebVel * dT;
+
+      // update scarfy's y position
       scarfyPos.y += velocity * dT;
       
-      // update runningTime
-      runningTime += dT; // add dT in each frame
-      if (runningTime >= updateTime) {
-         // update animation frame
-         runningTime = 0.0;
-         scarfyRec.x = frame * scarfyRec.width;
-         frame++;
-         // reset the frame when it reaches the last frame
-         if (frame > 5) {
-            frame = 0;
+      if (!isInAir) {
+         // update runningTime
+         runningTime += dT; // add dT in each frame
+         if (runningTime >= updateTime) { // && !isInAir)
+            // update animation frame
+            runningTime = 0.0;
+            scarfyRec.x = frame * scarfyRec.width;
+            frame++;
+            // reset the frame when it reaches the last frame
+            if (frame > 5) {
+               frame = 0;
+            }
          }
       }
 
-      // Draw the character
+      // draw the scarfy
       DrawTextureRec(scarfy, scarfyRec, scarfyPos, WHITE);
       
+      // draw nebula
+      DrawTextureRec(nebula, nebRec, nebPos, WHITE);
+
       EndDrawing();
    }
    // unload the texture
    UnloadTexture(scarfy);
+   UnloadTexture(nebula);
 
    // raylib function to close the window properly
    CloseWindow();
