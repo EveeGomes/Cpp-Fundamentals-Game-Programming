@@ -20,7 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="velocity.txt" />
-    <Text Include="gravity.txt" />
+    <Text Include="notes.txt" />
   </ItemGroup>
 </Project>

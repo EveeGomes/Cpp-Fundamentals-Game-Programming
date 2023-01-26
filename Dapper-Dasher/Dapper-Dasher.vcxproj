@@ -127,11 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dapper_dasher.cpp" />
+    <ClCompile Include="dapper_dasherrr.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="gravity.txt" />
-    <Text Include="velocity.txt" />
+    <Text Include="Gravity.txt" />
+    <Text Include="Velocity.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
