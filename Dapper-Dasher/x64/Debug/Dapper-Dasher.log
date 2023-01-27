@@ -3,8 +3,9 @@ C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\d
 C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(18,43): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(18,60): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
 C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(18,60): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(27,34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(28,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(40,39): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(66,30): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(26,42): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(32,34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(33,29): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(43,39): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(69,30): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Dapper-Dasher.vcxproj -> C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\x64\Debug\Dapper-Dasher.exe

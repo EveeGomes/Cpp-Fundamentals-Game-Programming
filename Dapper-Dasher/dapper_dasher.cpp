@@ -19,7 +19,12 @@ int main() {
    Vector2 nebPos{ windowWidth , windowHeight - nebRec.height };
    
    // nebula X velocity in (pixels/s) so we can use delta time to have this as frame independet
-   int nebVel = -600;
+   int nebVel = -200;
+
+   // nebula animation variables
+   int nebFrame{};
+   const float nebUpdateTime = 1.0 / 12.0;
+   float nebRunningTime{};
 
    // scarfy variables
    Texture2D scarfy = LoadTexture("textures/scarfy.png");
@@ -31,8 +36,6 @@ int main() {
    Vector2 scarfyPos;
    scarfyPos.x = windowWidth / 2 - scarfyRec.width / 2;
    scarfyPos.y = windowHeight - scarfyRec.height;
-
-
 
    // animation frame
    int frame{};
@@ -75,12 +78,25 @@ int main() {
       // update nebula's x position
       nebPos.x += nebVel * dT;
 
+      // update nebula's animation frame
+      // update nebula running time
+      nebRunningTime += dT;
+      if (nebRunningTime >= nebUpdateTime) {
+         nebRunningTime = 0.0;
+         nebRec.x = nebFrame * nebRec.width;
+         nebFrame++;
+         if (nebFrame > 7) {
+            nebFrame = 0;
+         }
+      }
+
       // update scarfy's y position
       scarfyPos.y += velocity * dT;
       
+      // update scarfy's animation frame
       if (!isInAir) {
          // update runningTime
-         runningTime += dT; // add dT in each frame
+         runningTime += dT;
          if (runningTime >= updateTime) { // && !isInAir)
             // update animation frame
             runningTime = 0.0;
