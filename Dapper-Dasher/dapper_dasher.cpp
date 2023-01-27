@@ -1,5 +1,13 @@
 #include "raylib.h"
 
+struct AnimData {
+   Rectangle rec{};
+   Vector2 pos{};
+   int frame{};
+   float updateTime{};
+   float runningTime{};
+};
+
 int main() {
 
    // window dimensions - make them constant
@@ -28,20 +36,16 @@ int main() {
 
    // scarfy variables
    Texture2D scarfy = LoadTexture("textures/scarfy.png");
-   Rectangle scarfyRec{};
-   scarfyRec.width = scarfy.width/6;
-   scarfyRec.height = scarfy.height;
-   scarfyRec.x = 0;
-   scarfyRec.y = 0;
-   Vector2 scarfyPos;
-   scarfyPos.x = windowWidth / 2 - scarfyRec.width / 2;
-   scarfyPos.y = windowHeight - scarfyRec.height;
-
-   // animation frame
-   int frame{};
-   // amount of time before we update the animation frame
-   const float updateTime = 1.0 / 12.0; // 1 12th of a second
-   float runningTime{};
+   AnimData scarfyData;
+   scarfyData.rec.width = scarfy.width / 6;
+   scarfyData.rec.height = scarfy.height;
+   scarfyData.rec.x = 0;
+   scarfyData.rec.y = 0;
+   scarfyData.pos.x = windowWidth / 2 - scarfyData.rec.width / 2;
+   scarfyData.pos.y = windowHeight - scarfyData.rec.height;
+   scarfyData.frame = 0;
+   scarfyData.updateTime = 1.0 / 12.0;
+   scarfyData.runningTime = 0.0;
 
    bool isInAir = false;
 

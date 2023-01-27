@@ -23,7 +23,6 @@ GetFrameTime() function in Raylib returns the DeltaTime
 - velocity is pixel/frame, but we can have it pixel per time instead:
 so if we have 
 velocity = 60 (pixel/s), we could get the DeltaTime as:
-float dT = GetFrameTime();
+float dT = GetFrameTime(); (in seconds)
 - then, to update the position:
-posY += velocity * dT;
-By multiplying the 
+posY += velocity * dT; (pixel/s) * (s)
