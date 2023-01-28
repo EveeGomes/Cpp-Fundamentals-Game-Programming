@@ -48,31 +48,40 @@ int main() {
    const int sizeOfNebulae = 10;
    AnimData nebulae[sizeOfNebulae]{};
 
-   // create a for loop to initialize the 2 nebulas in nebulae array
+   // create a for loop to initialize the nebulas in nebulae array
    for (int i = 0; i < sizeOfNebulae; i++) {
+      // select a sprite from the sprite sheet using a rec
       nebulae[i].rec.x = 0.0;
       nebulae[i].rec.y = 0.0;
       nebulae[i].rec.width = nebula.width / 8;
       nebulae[i].rec.height = nebula.height / 8;
+      // position in relation to the window (screen)
       nebulae[i].pos.x = windowDimensions[0] + i * 300;
       nebulae[i].pos.y = windowDimensions[1] - nebula.height / 8;
+      // variables related to animation
       nebulae[i].frame = 0;
       nebulae[i].runningTime = 0.0;
       nebulae[i].updateTime = 0.0;
    }
-   
+
+   // representation of x pos of a finish line so we can later check each frame and see if scarfy has reached/pass this to win the game
+   float finishLine = nebulae[sizeOfNebulae - 1].pos.x;
+      
    // nebula X velocity in (pixels/s) so we can use delta time to have this as frame independet
    int nebVel = -200;
 
    // scarfy variables
    Texture2D scarfy = LoadTexture("textures/scarfy.png");
    AnimData scarfyData;
+
    scarfyData.rec.width = scarfy.width / 6;
    scarfyData.rec.height = scarfy.height;
    scarfyData.rec.x = 0;
    scarfyData.rec.y = 0;
+
    scarfyData.pos.x = windowDimensions[0] / 2 - scarfyData.rec.width / 2;
    scarfyData.pos.y = windowDimensions[1] - scarfyData.rec.height;
+
    scarfyData.frame = 0;
    scarfyData.updateTime = 1.0 / 12.0;
    scarfyData.runningTime = 0.0;
@@ -92,6 +101,9 @@ int main() {
 
    Texture2D foreground = LoadTexture("textures/foreground.png");
    float fgX{};
+
+   // have it outside the while loop so when a collision happens and this bool is set to true, it won't be re-set to false (which would make the textures to be drawn back again!)
+   bool collision{};
 
    // set FPS to 60
    SetTargetFPS(60);
@@ -138,7 +150,6 @@ int main() {
       Vector2 fg2Pos{ fgX + foreground.width * 2, 0.0 };
       DrawTextureEx(foreground, fg2Pos, 0.0, 2.0, WHITE);
 
-
       // perform ground check
       if (isOnGround(scarfyData, windowDimensions[1])) { // have a function that can return this as a boolean value
          velocity = 0;
@@ -172,13 +183,55 @@ int main() {
          nebulae[i] = updateAnimData(nebulae[i], dT, 7);
       }
 
-      // draw scarfy
-      DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
+      // update finishLine, which will have the same velocity as the nebulae
+      finishLine += nebVel * dT;
 
-      // draw nebulae
-      for (int i = 0; i < sizeOfNebulae; i++) {
-         DrawTextureRec(nebula, nebulae[i].rec, nebulae[i].pos, WHITE);
+      for (const AnimData& nebula : nebulae) {
+         // before checking for collision, we need Rectangle variables to represent each nebula dimension so it can be passed to the raylib collision function
+         // also, we'll need to fix the padding of each nebula rectangle; check lecture 54. Collision Detection @time 4:38
+         float pad = 50;
+
+         Rectangle nebRec{
+            nebula.pos.x + pad,
+            nebula.pos.y + pad,
+            nebula.rec.width - 2*pad,
+            nebula.rec.height - 2*pad
+         };
+         // we can't directly use the nebula.rec variable because it's used to select a sprite from the sprite sheet;
+         // so nebula.rec.x and nebula.rec.y doesn't represent the nebula's position on the screen but rather its position in the sprite sheet!
+         // ie, the way it is above, we're getting the location of a nebula on the screen!!!
+
+         // now, scarfy rectangle
+         Rectangle scarfyRec{
+            scarfyData.pos.x,
+            scarfyData.pos.y,
+            scarfyData.rec.width,
+            scarfyData.rec.height
+         };
+         // no need to have a pad for scarfy sprite since its character already takes all the edges of each animation frame
+
+         // now use the collision raylib function using a condition
+         if (CheckCollisionRecs(nebRec, scarfyRec)) {
+            collision = true;
+         }
       }
+
+      if (collision) {
+         // lose the game
+      }
+      else {
+         // draw textures
+         
+         // draw scarfy
+         DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
+
+         // draw nebulae
+         for (int i = 0; i < sizeOfNebulae; i++) {
+            DrawTextureRec(nebula, nebulae[i].rec, nebulae[i].pos, WHITE);
+         }
+      }
+      
+
 
       EndDrawing();
    }
