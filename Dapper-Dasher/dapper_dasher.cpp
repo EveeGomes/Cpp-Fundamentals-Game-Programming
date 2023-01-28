@@ -25,23 +25,23 @@ int main() {
 
    // nebula variables
    Texture2D nebula = LoadTexture("textures/12_nebula_spritesheet.png");
-   // AnimData object for nebula
-   AnimData nebData{
-      {0.0, 0.0, nebula.width / 8, nebula.height / 8},   // Rectangle rec
-      {windowDimensions[0] , windowDimensions[1] - nebula.height / 8},  // Vector2 pos
-      0,                                                 // int frame
-      1.0 / 12.0,                                        // float updateTime
-      0.0                                                // float runningTime
-   };
+   AnimData nebulae[3]{};
 
-   // AnimData instance for the second nebula
-   AnimData neb2Data{
-      {0.0, 0.0, nebula.width / 8, nebula.height / 8},         // Rectangle rec
-      {windowDimensions[0] + 300, windowDimensions[1] - nebula.height / 8},   // Vector2 pos
-      0,                                                       // int frame
-      1.0/16.0,                                                // float updateTime
-      0.0                                                      // float runningTime
-   };
+   // create a for loop to initialize the 2 nebulas in nebulae array
+   for (int i = 0; i < 3; i++) {
+      nebulae[i].rec.x = 0.0;
+      nebulae[i].rec.y = 0.0;
+      nebulae[i].rec.width = nebula.width / 8;
+      nebulae[i].rec.height = nebula.height / 8;
+      nebulae[i].pos.y = windowDimensions[1] - nebula.height / 8;
+      nebulae[i].frame = 0;
+      nebulae[i].runningTime = 0.0;
+      nebulae[i].updateTime = 0.0;
+   }
+
+   nebulae[0].pos.x = windowDimensions[0];
+   nebulae[1].pos.x = windowDimensions[0] + 300;
+   nebulae[2].pos.x = windowDimensions[0] + 600;
    
    // nebula X velocity in (pixels/s) so we can use delta time to have this as frame independet
    int nebVel = -200;
@@ -92,31 +92,31 @@ int main() {
       }
 
       // update nebula's x position
-      nebData.pos.x += nebVel * dT;
+      nebulae[0].pos.x += nebVel * dT;
 
       // update nebula's animation frame
       // update nebula running time
-      nebData.runningTime += dT;
-      if (nebData.runningTime >= nebData.updateTime) {
-         nebData.runningTime = 0.0;
-         nebData.rec.x = nebData.frame * nebData.rec.width;
-         nebData.frame++;
-         if (nebData.frame > 7) {
-            nebData.frame = 0;
+      nebulae[0].runningTime += dT;
+      if (nebulae[0].runningTime >= nebulae[0].updateTime) {
+         nebulae[0].runningTime = 0.0;
+         nebulae[0].rec.x = nebulae[0].frame * nebulae[0].rec.width;
+         nebulae[0].frame++;
+         if (nebulae[0].frame > 7) {
+            nebulae[0].frame = 0;
          }
       }
 
       // second nebula
-      neb2Data.pos.x += nebVel * dT;
+      nebulae[1].pos.x += nebVel * dT;
 
       // update second nebula animation frame
-      neb2Data.runningTime += dT;
-      if (neb2Data.runningTime >= neb2Data.updateTime) {
-         neb2Data.runningTime = 0.0;
-         neb2Data.rec.x = neb2Data.frame * neb2Data.rec.width;
-         neb2Data.frame++;
-         if (neb2Data.frame > 7) {
-            neb2Data.frame = 0;
+      nebulae[1].runningTime += dT;
+      if (nebulae[1].runningTime >= nebulae[1].updateTime) {
+         nebulae[1].runningTime = 0.0;
+         nebulae[1].rec.x = nebulae[1].frame * nebulae[1].rec.width;
+         nebulae[1].frame++;
+         if (nebulae[1].frame > 7) {
+            nebulae[1].frame = 0;
          }
       }
 
@@ -144,10 +144,10 @@ int main() {
       DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
       
       // draw nebula
-      DrawTextureRec(nebula, nebData.rec, nebData.pos, WHITE);
+      DrawTextureRec(nebula, nebulae[0].rec, nebulae[0].pos, WHITE);
 
       // draw second nebula
-      DrawTextureRec(nebula, neb2Data.rec, neb2Data.pos, RED);
+      DrawTextureRec(nebula, nebulae[1].rec, nebulae[1].pos, RED);
 
       EndDrawing();
    }
