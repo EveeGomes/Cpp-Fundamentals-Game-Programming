@@ -6,5 +6,5 @@ C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\d
 C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(77,40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(78,34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(86,38): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(159,30): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\dapper_dasher.cpp(163,30): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
   Dapper-Dasher.vcxproj -> C:\Users\evepg\Documents\Udemy\Cpp-Fundamentals-Game-Programming\Dapper-Dasher\x64\Debug\Dapper-Dasher.exe

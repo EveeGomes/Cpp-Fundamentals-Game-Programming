@@ -45,7 +45,7 @@ int main() {
    // nebula variables
    Texture2D nebula = LoadTexture("textures/12_nebula_spritesheet.png");
 
-   const int sizeOfNebulae = 10;
+   const int sizeOfNebulae = 5;
    AnimData nebulae[sizeOfNebulae]{};
 
    // create a for loop to initialize the nebulas in nebulae array
@@ -56,7 +56,7 @@ int main() {
       nebulae[i].rec.width = nebula.width / 8;
       nebulae[i].rec.height = nebula.height / 8;
       // position in relation to the window (screen)
-      nebulae[i].pos.x = windowDimensions[0] + i * 300;
+      nebulae[i].pos.x = windowDimensions[0] + i * 400;
       nebulae[i].pos.y = windowDimensions[1] - nebula.height / 8;
       // variables related to animation
       nebulae[i].frame = 0;
@@ -104,6 +104,10 @@ int main() {
 
    // have it outside the while loop so when a collision happens and this bool is set to true, it won't be re-set to false (which would make the textures to be drawn back again!)
    bool collision{};
+
+   // text for winning or losing the game
+   const char* msg = nullptr;
+   int textWidth{};
 
    // set FPS to 60
    SetTargetFPS(60);
@@ -218,10 +222,18 @@ int main() {
 
       if (collision) {
          // lose the game
+         msg = "Game Over!";
+         textWidth = MeasureText(msg, 60);
+         DrawText(msg, windowDimensions[0]/2 - textWidth/2, windowDimensions[1]/2, 60, RED);
+      }
+      else if (scarfyData.pos.x >= finishLine) {
+         // win the game
+         msg = "You Win!";
+         textWidth = MeasureText(msg, 60);
+         DrawText(msg, windowDimensions[0] / 2 - textWidth / 2, windowDimensions[1] / 2, 60, YELLOW);
       }
       else {
          // draw textures
-         
          // draw scarfy
          DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
 
@@ -230,9 +242,6 @@ int main() {
             DrawTextureRec(nebula, nebulae[i].rec, nebulae[i].pos, WHITE);
          }
       }
-      
-
-
       EndDrawing();
    }
    // unload textures
