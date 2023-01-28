@@ -100,12 +100,20 @@ int main() {
       ClearBackground(WHITE);
 
       // update bgX position
-      bgX -= 20 * dT; // * dT so the movement is frame rate independent
+      bgX -= 20 * dT; // negative as we want it to be scrolling to the left
+      // to have the background reset:
+      if (bgX <= -background.width * 2) { // when bgX reaches the end of the second frame, we have to reset it 
+         bgX = 0.0;
+      }
 
       // draw the background (right after clearing the background white)
       // create a Vector2 to pass to DrawTextureEx
-      Vector2 bgPos{bgX, 0.0 }; // instead of using 0.0 for x coordinate, we use bgX which is constantly been updated!
-      DrawTextureEx(background, bgPos, 0.0, 2.0, WHITE); // increase the scale to have the texture cover the entire window
+      Vector2 bg1Pos{bgX, 0.0 }; // change from bgPos to bg1Pos
+      DrawTextureEx(background, bg1Pos, 0.0, 2.0, WHITE);
+      // create another Vector2 so we duplicate the background
+      Vector2 bg2Pos{ bgX + background.width * 2, 0.0 }; // background.width*2 because we're scaling by 2 in the DrawTectureEx above!
+      DrawTextureEx(background, bg2Pos, 0.0, 2.0, WHITE);
+
 
       // perform ground check
       if (isOnGround(scarfyData, windowDimensions[1])) { // have a function that can return this as a boolean value
