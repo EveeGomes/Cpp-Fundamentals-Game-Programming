@@ -84,6 +84,10 @@ int main() {
 
    int velocity = 0;
 
+   Texture2D background = LoadTexture("textures/far-buildings.png");
+   // to scroll the img to the screen, create an X coordinate variable (which we have in Vector2)
+   float bgX{};
+
    // set FPS to 60
    SetTargetFPS(60);
 
@@ -94,6 +98,14 @@ int main() {
 
       BeginDrawing();
       ClearBackground(WHITE);
+
+      // update bgX position
+      bgX -= 20 * dT; // * dT so the movement is frame rate independent
+
+      // draw the background (right after clearing the background white)
+      // create a Vector2 to pass to DrawTextureEx
+      Vector2 bgPos{bgX, 0.0 }; // instead of using 0.0 for x coordinate, we use bgX which is constantly been updated!
+      DrawTextureEx(background, bgPos, 0.0, 2.0, WHITE); // increase the scale to have the texture cover the entire window
 
       // perform ground check
       if (isOnGround(scarfyData, windowDimensions[1])) { // have a function that can return this as a boolean value
@@ -138,9 +150,10 @@ int main() {
 
       EndDrawing();
    }
-   // unload the texture
+   // unload textures
    UnloadTexture(scarfy);
    UnloadTexture(nebula);
+   UnloadTexture(background);
 
    // raylib function to close the window properly
    CloseWindow();
