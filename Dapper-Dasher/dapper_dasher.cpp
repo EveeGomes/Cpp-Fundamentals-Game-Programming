@@ -8,6 +8,25 @@ struct AnimData {
    float runningTime{};
 };
 
+bool isOnGround(AnimData data, int windowHeight) { // the param choices: the function needs to know scarfy's position and the window's height
+   return data.pos.y >= windowHeight - data.rec.height;
+}
+
+AnimData updateAnimData(AnimData data, float deltaTime, int maxFrame) { // param choice: we'll need to take AnimData to update its members and one of its changes are done by using delta time, which is a float; maxFrame is a param because it changes from scarfy and nebulae sprite sheets
+   // update running time
+   data.runningTime += deltaTime;
+   if (data.runningTime >= data.updateTime) {
+      data.runningTime = 0.0;
+      // update animation frame
+      data.rec.x = data.frame * data.rec.width;
+      data.frame++;
+      if (data.frame > maxFrame) {
+         data.frame = 0;
+      }
+   }
+   return data;
+}
+
 int main() {
 
    // array with window dimensions
@@ -70,13 +89,14 @@ int main() {
 
    // Game while loop
    while (!WindowShouldClose()) {  
-      BeginDrawing();
-      ClearBackground(WHITE);
-
       // delta time (time since last frame)
       const float dT = GetFrameTime();
 
-      if (scarfyData.pos.y >= windowDimensions[1] - scarfyData.rec.height) {
+      BeginDrawing();
+      ClearBackground(WHITE);
+
+      // perform ground check
+      if (isOnGround(scarfyData, windowDimensions[1])) { // have a function that can return this as a boolean value
          velocity = 0;
          isInAir = false;
       }
@@ -95,18 +115,7 @@ int main() {
 
       // update scarfy's animation frame
       if (!isInAir) {
-         // update runningTime
-         scarfyData.runningTime += dT;
-         if (scarfyData.runningTime >= scarfyData.updateTime) {
-            // update animation frame
-            scarfyData.runningTime = 0.0;
-            scarfyData.rec.x = scarfyData.frame * scarfyData.rec.width;
-            scarfyData.frame++;
-            // reset the frame when it reaches the last frame
-            if (scarfyData.frame > 5) {
-               scarfyData.frame = 0;
-            }
-         }
+         scarfyData = updateAnimData(scarfyData, dT, 5);
       }
 
       // update nebulae x positions
@@ -116,7 +125,8 @@ int main() {
 
       // update nebulae animation frames
       for (int i = 0; i < sizeOfNebulae; i++) {
-         nebulae[i].runningTime += dT;
+         nebulae[i] = updateAnimData(nebulae[i], dT, 7);
+         /*nebulae[i].runningTime += dT;
          if (nebulae[i].runningTime >= nebulae[i].updateTime) {
             nebulae[i].runningTime = 0.0;
             nebulae[i].rec.x = nebulae[i].frame * nebulae[i].rec.width;
@@ -124,7 +134,7 @@ int main() {
             if (nebulae[i].frame > 7) {
                nebulae[i].frame = 0;
             }
-         }
+         }*/
       }
 
       // draw scarfy
