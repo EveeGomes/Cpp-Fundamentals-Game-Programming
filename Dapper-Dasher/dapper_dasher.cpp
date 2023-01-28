@@ -85,8 +85,13 @@ int main() {
    int velocity = 0;
 
    Texture2D background = LoadTexture("textures/far-buildings.png");
-   // to scroll the img to the screen, create an X coordinate variable (which we have in Vector2)
    float bgX{};
+
+   Texture2D midground = LoadTexture("textures/back-buildings.png");
+   float mgX{};
+
+   Texture2D foreground = LoadTexture("textures/foreground.png");
+   float fgX{};
 
    // set FPS to 60
    SetTargetFPS(60);
@@ -99,11 +104,20 @@ int main() {
       BeginDrawing();
       ClearBackground(WHITE);
 
-      // update bgX position
-      bgX -= 20 * dT; // negative as we want it to be scrolling to the left
-      // to have the background reset:
-      if (bgX <= -background.width * 2) { // when bgX reaches the end of the second frame, we have to reset it 
+      // update bgX position to scroll the background
+      bgX -= 20 * dT;
+      if (bgX <= -background.width * 2) {
          bgX = 0.0;
+      }
+      // scroll the midground
+      mgX -= 40 * dT;
+      if (mgX <= -midground.width * 2) {
+         mgX = 0.0;
+      }
+      // scroll the foreground
+      fgX -= 80 * dT;
+      if (fgX <= -foreground.width * 2) {
+         fgX = 0.0;
       }
 
       // draw the background (right after clearing the background white)
@@ -113,6 +127,16 @@ int main() {
       // create another Vector2 so we duplicate the background
       Vector2 bg2Pos{ bgX + background.width * 2, 0.0 }; // background.width*2 because we're scaling by 2 in the DrawTectureEx above!
       DrawTextureEx(background, bg2Pos, 0.0, 2.0, WHITE);
+
+      Vector2 mg1Pos{ mgX, 0.0 };
+      DrawTextureEx(midground, mg1Pos, 0.0, 2.0, WHITE);
+      Vector2 mg2Pos{ mgX + midground.width * 2, 0.0 };
+      DrawTextureEx(midground, mg2Pos, 0.0, 2.0, WHITE);
+
+      Vector2 fg1Pos{ fgX, 0.0 };
+      DrawTextureEx(foreground, fg1Pos, 0.0, 2.0, WHITE);
+      Vector2 fg2Pos{ fgX + foreground.width * 2, 0.0 };
+      DrawTextureEx(foreground, fg2Pos, 0.0, 2.0, WHITE);
 
 
       // perform ground check
@@ -162,6 +186,8 @@ int main() {
    UnloadTexture(scarfy);
    UnloadTexture(nebula);
    UnloadTexture(background);
+   UnloadTexture(midground);
+   UnloadTexture(foreground);
 
    // raylib function to close the window properly
    CloseWindow();
