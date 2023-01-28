@@ -41,7 +41,6 @@ int main() {
       0.0                                                      // float runningTime
    };
    
-
    // nebula X velocity in (pixels/s) so we can use delta time to have this as frame independet
    int nebVel = -200;
 
@@ -76,7 +75,7 @@ int main() {
       // delta time (time since last frame)
       const float dT = GetFrameTime();
 
-      if (scarfyPos.y >= windowHeight - scarfyRec.height) {
+      if (scarfyData.pos.y >= windowHeight - scarfyData.rec.height) {
          velocity = 0;
          isInAir = false;
       }
@@ -91,44 +90,62 @@ int main() {
       }
 
       // update nebula's x position
-      nebPos.x += nebVel * dT;
+      nebData.pos.x += nebVel * dT;
 
       // update nebula's animation frame
       // update nebula running time
-      nebRunningTime += dT;
-      if (nebRunningTime >= nebUpdateTime) {
-         nebRunningTime = 0.0;
-         nebRec.x = nebFrame * nebRec.width;
-         nebFrame++;
-         if (nebFrame > 7) {
-            nebFrame = 0;
+      nebData.runningTime += dT;
+      if (nebData.runningTime >= nebData.updateTime) {
+         nebData.runningTime = 0.0;
+         nebData.rec.x = nebData.frame * nebData.rec.width;
+         nebData.frame++;
+         if (nebData.frame > 7) {
+            nebData.frame = 0;
          }
       }
 
+      // second nebula
+      neb2Data.pos.x += nebVel * dT;
+
+      // update second nebula animation frame
+      neb2Data.runningTime += dT;
+      if (neb2Data.runningTime >= neb2Data.updateTime) {
+         neb2Data.runningTime = 0.0;
+         neb2Data.rec.x = neb2Data.frame * neb2Data.rec.width;
+         neb2Data.frame++;
+         if (neb2Data.frame > 7) {
+            neb2Data.frame = 0;
+         }
+      }
+
+
       // update scarfy's y position
-      scarfyPos.y += velocity * dT;
+      scarfyData.pos.y += velocity * dT;
       
       // update scarfy's animation frame
       if (!isInAir) {
          // update runningTime
-         runningTime += dT;
-         if (runningTime >= updateTime) { // && !isInAir)
+         scarfyData.runningTime += dT;
+         if (scarfyData.runningTime >= scarfyData.updateTime) {
             // update animation frame
-            runningTime = 0.0;
-            scarfyRec.x = frame * scarfyRec.width;
-            frame++;
+            scarfyData.runningTime = 0.0;
+            scarfyData.rec.x = scarfyData.frame * scarfyData.rec.width;
+            scarfyData.frame++;
             // reset the frame when it reaches the last frame
-            if (frame > 5) {
-               frame = 0;
+            if (scarfyData.frame > 5) {
+               scarfyData.frame = 0;
             }
          }
       }
 
       // draw the scarfy
-      DrawTextureRec(scarfy, scarfyRec, scarfyPos, WHITE);
+      DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
       
       // draw nebula
-      DrawTextureRec(nebula, nebRec, nebPos, WHITE);
+      DrawTextureRec(nebula, nebData.rec, nebData.pos, WHITE);
+
+      // draw second nebula
+      DrawTextureRec(nebula, neb2Data.rec, neb2Data.pos, RED);
 
       EndDrawing();
    }
