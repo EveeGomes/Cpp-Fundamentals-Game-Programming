@@ -2,12 +2,11 @@
 #include "raymath.h"
 
 class Character {
-   // initialize member variables using curly braces initialization syntax
    Texture2D m_texture{ LoadTexture("characters/knight_idle_spritesheet.png") };
    Texture2D m_idle{ LoadTexture("characters/knight_idle_spritesheet.png") };
    Texture2D m_run{ LoadTexture("characters/knight_run_spritesheet.png") };
    Vector2 m_screenPos;
-   Vector2 m_worldPos; // since the character moves around the world
+   Vector2 m_worldPos;
 
    // animation variables
    float rightLeft = 1.f;
@@ -15,17 +14,17 @@ class Character {
    int frame{};
    const int maxFrames = 6;
    const float updateTime = 1.f / 12.f;
-   const float speed = 4.f; // add this since it's used to determine the mapPos according to the direction vector magnitutde
+   const float speed = 4.f;
 
 public:
    Vector2 getWorldPos() { return m_worldPos; }
-   void setScreenPos(int winWidth, int winHeight); // define it outside the class
+   void setScreenPos(int winWidth, int winHeight);
    /*
    *  Tick function takes care of what happens at each and every frame;
    *     It's called every frame (so it's placed inside the Game while loop
    *     We pass dT as a float value, and this value will be used to update all variables on the character that need to be updated.
    */
-
+   void tick(float deltaTime);
 
 };
 
@@ -34,6 +33,30 @@ void Character::setScreenPos(int winWidth, int winHeight) {
       (float)winWidth / 2.0f - 4.0f * (0.5f * (float)m_texture.width / 6.0f),
       (float)winHeight / 2.0f - 4.0f * (0.5f * (float)m_texture.height)
    };
+}
+
+void Character::tick(float deltaTime) {
+   // 1st, take the code for handling inputs from the while loop and paste it here;
+   // 2nd, change to the member variables
+   // 3rd, add direction instead of subtract to m_worldPos
+   // vector and keys to determine the direction among the map
+   Vector2 direction{};
+   if (IsKeyDown(KEY_A)) direction.x -= 1.0f;
+   if (IsKeyDown(KEY_D)) direction.x += 1.0f;
+   if (IsKeyDown(KEY_W)) direction.y -= 1.0f;
+   if (IsKeyDown(KEY_S)) direction.y += 1.0f;
+
+   // direction vector used to move the map:
+   if (Vector2Length(direction) != 0.0f) { // checks if direction magnitude isn't zero
+      m_texture = m_run;
+      // now we'll set m_worldPos to be the sum of m_worldPos + direction (add direction instead of subtracting because now we're changing the character's world position)
+      // set m_worldPos = m_worldPos + direction
+      m_worldPos = Vector2Add(m_worldPos, Vector2Scale(Vector2Normalize(direction), speed));      // set the rightLeft variable here:
+      direction.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
+   }
+   else {
+      m_texture = m_idle;
+   }
 }
 
 int main() {
