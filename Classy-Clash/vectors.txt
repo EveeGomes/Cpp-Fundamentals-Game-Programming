@@ -1,0 +1,5 @@
+Vectors are used to represent: Direction
+							   Position
+
+They can be used to facilitate MOVEMENT in the video game
+
