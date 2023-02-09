@@ -45,14 +45,7 @@ int main() {
       if (Vector2Length(direction) != 0.0f) {
          mapPos = Vector2Subtract(mapPos, Vector2Scale(Vector2Normalize(direction), speed));
          // set the rightLeft variable here:
-         if (direction.x < 0.f) {
-            // moving to the left
-            rightLeft = -1.f;
-         }
-         else {
-            // moving to the right
-            rightLeft = 1.f;
-         }
+         direction.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
       }
 
       // draw the map
