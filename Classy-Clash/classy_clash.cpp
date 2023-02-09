@@ -1,6 +1,26 @@
 #include "raylib.h"
 #include "raymath.h"
 
+class Character {
+   Texture2D m_texture;
+   Texture2D m_idle;
+   Texture2D m_run;
+   Vector2 m_screenPos;
+   Vector2 m_worldPos; // since the character moves around the world
+
+   // animation variables
+   float rightLeft = 1.f;
+   float runningTime{};
+   int frame{};
+   const int maxFrames = 6;
+   const float updateTime = 1.f / 12.f;
+
+public:
+   // when creating an instance of this class, we need the information from m_worldPos to know where to draw the map
+   Vector2 getWorldPos() { return m_worldPos; }
+   // since this function has only one statement, we can place the body on the same line as the function statement
+};
+
 int main() {
 
    // window dimensions array
