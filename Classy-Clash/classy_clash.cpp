@@ -21,8 +21,8 @@ int main() {
    // load the knight character
    Texture2D knight = LoadTexture("characters/knight_idle.spritesheet.png");
    Vector2 knightPos{
-      winDimensions[0] / 2.0 - 4.0 * (0.5 * knight.width / 6), // windows width - half of knight.width divided by 6 as the sprite sheet as 6 images.
-      winDimensions[1] / 2.0 - 4.0 * (0.5 * knight.height)
+      (float)winDimensions[0] / 2.0f - 4.0f * (0.5f * (float)knight.width / 6.0f), // windows width - half of knight.width divided by 6 as the sprite sheet as 6 images.
+      (float)winDimensions[1] / 2.0f - 4.0f * (0.5f * (float)knight.height)
    };
    // we'll use DrawTexturePro for drawing this texture because with this function we can scale the image (since it's really small)
    // so, in the knightPos vector, we'll multiply the knight.width and knight.height whole parenthesis by 4.0
