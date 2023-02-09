@@ -15,13 +15,19 @@ int main() {
    Texture2D map = LoadTexture("nature_tileset/OpenWorldMap24x24.png");
    // put this vector outside the loop so the value is saved between iterations of the loop.
    Vector2 mapPos{ 0.0, 0.0 };
-
    // used to scale the movement vector (direction vector)!
    float speed = 4.0;
 
-   SetTargetFPS(60);
+   // load the knight character
+   Texture2D knight = LoadTexture("characters/knight_idle.spritesheet.png");
+   Vector2 knightPos{
+      winDimensions[0] / 2.0 - 4.0 * (0.5 * knight.width / 6), // windows width - half of knight.width divided by 6 as the sprite sheet as 6 images.
+      winDimensions[1] / 2.0 - 4.0 * (0.5 * knight.height)
+   };
+   // we'll use DrawTexturePro for drawing this texture because with this function we can scale the image (since it's really small)
+   // so, in the knightPos vector, we'll multiply the knight.width and knight.height whole parenthesis by 4.0
 
-   // Game while loop
+   SetTargetFPS(60);
    while (!WindowShouldClose()) {
 
       BeginDrawing();
