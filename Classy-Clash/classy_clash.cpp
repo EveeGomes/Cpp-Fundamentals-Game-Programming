@@ -23,13 +23,19 @@ int main() {
       (float)winDimensions[0] / 2.0f - 4.0f * (0.5f * (float)knight.width / 6.0f),
       (float)winDimensions[1] / 2.0f - 4.0f * (0.5f * (float)knight.height)
    };
-   // determines the direction of the sprite; the convention used here is:
-   // 1: facing right, -1: facing left
-   // so, depending on the move direction we'll set 1 or -1
+   // determines the direction of the sprite; the convention => 1: facing right, -1: facing left
    float rightLeft = 1.f;
+
+   // animation variables
+   float runningTime{};
+   int frame{}; // current animation frame from the spritesheet
+   const int maxFrames = 6;
+   const float updateTime = 1.f / 12.f;
+
 
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
+      const float dT = GetFrameTime();
 
       BeginDrawing();
       ClearBackground(WHITE);
@@ -51,8 +57,17 @@ int main() {
       // draw the map
       DrawTextureEx(map, mapPos, 0.0f, 4.0f, WHITE);
 
+      // update animation frame
+      runningTime += dT;
+      if (runningTime >= updateTime) {
+         frame++;
+         runningTime = 0.f;
+         if (frame > maxFrames) frame = 0;
+      }
+
       // draw the character
-      Rectangle srcK{0.f, 0.f, rightLeft*(float)knight.width/6.f, (float)knight.height}; // w/ rightLeft variable set, we'll scale the width of source rectangle with it. This will result in the texture to flip direction since the negative sign changes directions! (if it's -1, texture flips and face left, otherwise it'll face right)
+      // this source rectangle is where we choose the animation frame. The x component determines which frame to choose... So, we'll replace the x value of 0.f to   frame * (float)knight.width/6.f; this allows us to select the frame from the spritesheet
+      Rectangle srcK{ frame * (float)knight.width / 6.f, 0.f, rightLeft*(float)knight.width/6.f, (float)knight.height};
       Rectangle destK{knightPos.x, knightPos.y, 4.0f * (float)knight.width/6.0f, 4.0f * (float)knight.height};
       DrawTexturePro(knight, srcK, destK, Vector2{}, 0.f, WHITE);
 
