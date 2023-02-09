@@ -2,9 +2,10 @@
 #include "raymath.h"
 
 class Character {
-   Texture2D m_texture;
-   Texture2D m_idle;
-   Texture2D m_run;
+   // initialize member variables using curly braces initialization syntax
+   Texture2D m_texture{ LoadTexture("characters/knight_idle_spritesheet.png") };
+   Texture2D m_idle{ LoadTexture("characters/knight_idle_spritesheet.png") };
+   Texture2D m_run{ LoadTexture("characters/knight_run_spritesheet.png") };
    Vector2 m_screenPos;
    Vector2 m_worldPos; // since the character moves around the world
 
@@ -14,12 +15,26 @@ class Character {
    int frame{};
    const int maxFrames = 6;
    const float updateTime = 1.f / 12.f;
+   const float speed = 4.f; // add this since it's used to determine the mapPos according to the direction vector magnitutde
 
 public:
-   // when creating an instance of this class, we need the information from m_worldPos to know where to draw the map
    Vector2 getWorldPos() { return m_worldPos; }
-   // since this function has only one statement, we can place the body on the same line as the function statement
+   void setScreenPos(int winWidth, int winHeight); // define it outside the class
+   /*
+   *  Tick function takes care of what happens at each and every frame;
+   *     It's called every frame (so it's placed inside the Game while loop
+   *     We pass dT as a float value, and this value will be used to update all variables on the character that need to be updated.
+   */
+
+
 };
+
+void Character::setScreenPos(int winWidth, int winHeight) {
+   m_screenPos = {
+      (float)winWidth / 2.0f - 4.0f * (0.5f * (float)m_texture.width / 6.0f),
+      (float)winHeight / 2.0f - 4.0f * (0.5f * (float)m_texture.height)
+   };
+}
 
 int main() {
 
