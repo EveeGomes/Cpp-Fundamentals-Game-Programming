@@ -52,7 +52,7 @@ int main() {
       DrawTextureEx(map, mapPos, 0.0f, 4.0f, WHITE);
 
       // draw the character
-      Rectangle srcK{0.f, 0.f, (float)knight.width/6.f, (float)knight.height};
+      Rectangle srcK{0.f, 0.f, rightLeft*(float)knight.width/6.f, (float)knight.height}; // w/ rightLeft variable set, we'll scale the width of source rectangle with it. This will result in the texture to flip direction since the negative sign changes directions! (if it's -1, texture flips and face left, otherwise it'll face right)
       Rectangle destK{knightPos.x, knightPos.y, 4.0f * (float)knight.width/6.0f, 4.0f * (float)knight.height};
       DrawTexturePro(knight, srcK, destK, Vector2{}, 0.f, WHITE);
 
