@@ -23,7 +23,10 @@ int main() {
       (float)winDimensions[0] / 2.0f - 4.0f * (0.5f * (float)knight.width / 6.0f),
       (float)winDimensions[1] / 2.0f - 4.0f * (0.5f * (float)knight.height)
    };
-   
+   // determines the direction of the sprite; the convention used here is:
+   // 1: facing right, -1: facing left
+   // so, depending on the move direction we'll set 1 or -1
+   float rightLeft = 1.f;
 
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
@@ -41,6 +44,15 @@ int main() {
       // direction vector used to move the map:
       if (Vector2Length(direction) != 0.0f) {
          mapPos = Vector2Subtract(mapPos, Vector2Scale(Vector2Normalize(direction), speed));
+         // set the rightLeft variable here:
+         if (direction.x < 0.f) {
+            // moving to the left
+            rightLeft = -1.f;
+         }
+         else {
+            // moving to the right
+            rightLeft = 1.f;
+         }
       }
 
       // draw the map
