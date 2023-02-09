@@ -17,6 +17,10 @@ int main() {
    // used to scale the movement vector (direction vector)!
    float speed = 4.0;
 
+   // create 2 Texture2D using the idle and running knight spritesheets
+   Texture2D knight_idle = LoadTexture("characters/knight_idle_spritesheet.png");
+   Texture2D knight_run = LoadTexture("characters/knight_run_spritesheet.png");
+
    // load the knight character
    Texture2D knight = LoadTexture("characters/knight_idle_spritesheet.png");
    Vector2 knightPos{
@@ -28,7 +32,7 @@ int main() {
 
    // animation variables
    float runningTime{};
-   int frame{}; // current animation frame from the spritesheet
+   int frame{};
    const int maxFrames = 6;
    const float updateTime = 1.f / 12.f;
 
@@ -48,10 +52,14 @@ int main() {
       if (IsKeyDown(KEY_S)) direction.y += 1.0f;
 
       // direction vector used to move the map:
-      if (Vector2Length(direction) != 0.0f) {
+      if (Vector2Length(direction) != 0.0f) { // checks if direction magnitude isn't zero
+         knight = knight_run;
          mapPos = Vector2Subtract(mapPos, Vector2Scale(Vector2Normalize(direction), speed));
          // set the rightLeft variable here:
          direction.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
+      }
+      else {
+         knight = knight_idle;
       }
 
       // draw the map
@@ -66,7 +74,6 @@ int main() {
       }
 
       // draw the character
-      // this source rectangle is where we choose the animation frame. The x component determines which frame to choose... So, we'll replace the x value of 0.f to   frame * (float)knight.width/6.f; this allows us to select the frame from the spritesheet
       Rectangle srcK{ frame * (float)knight.width / 6.f, 0.f, rightLeft*(float)knight.width/6.f, (float)knight.height};
       Rectangle destK{knightPos.x, knightPos.y, 4.0f * (float)knight.width/6.0f, 4.0f * (float)knight.height};
       DrawTexturePro(knight, srcK, destK, Vector2{}, 0.f, WHITE);
