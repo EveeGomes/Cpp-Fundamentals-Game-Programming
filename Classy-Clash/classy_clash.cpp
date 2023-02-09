@@ -16,6 +16,9 @@ int main() {
    // put this vector outside the loop so the value is saved between iterations of the loop.
    Vector2 mapPos{ 0.0, 0.0 };
 
+   // used to scale the movement vector!
+   float speed = 4.0;
+
    SetTargetFPS(60);
 
    // Game while loop
@@ -32,6 +35,18 @@ int main() {
       if (IsKeyDown(KEY_D)) direction.x += 1.0;
       if (IsKeyDown(KEY_W)) direction.y -= 1.0;
       if (IsKeyDown(KEY_S)) direction.y += 1.0;
+
+      // now, we use direction vector to move the map!!
+      // 
+      // need to check if the direction vector is equal to zero; if it is, we don't need to move anywhere!
+      if (Vector2Length(direction) != 0.0) { // this function needs raymath.h to be recognized!
+         // need to normalize the vector, otherwise we would be moving faster in diagonal than we would actually be moving just down or up.
+
+         // Vector2Normalize(direction) returns a normalized vector; it gives the direction we want to move, but we actually need to move in the oposite direction, meaning we need:
+         // set mapPos = mapPos - direction, but this direction has to be the one returned by the normalize function!
+
+         mapPos = Vector2Subtract(mapPos, Vector2Scale(Vector2Normalize(direction), speed));
+      }
 
       // draw the map
       DrawTextureEx(map, mapPos, 0.0, 4.0, WHITE);
