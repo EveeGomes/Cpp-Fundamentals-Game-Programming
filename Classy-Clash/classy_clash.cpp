@@ -9,12 +9,12 @@ class Character {
    Vector2 m_worldPos;
 
    // animation variables
-   float rightLeft = 1.f;
-   float runningTime{};
-   int frame{};
-   const int maxFrames = 6;
-   const float updateTime = 1.f / 12.f;
-   const float speed = 4.f;
+   float m_rightLeft = 1.f;
+   float m_runningTime{};
+   int m_frame{};
+   const int m_maxFrames = 6;
+   const float m_updateTime = 1.f / 12.f;
+   const float m_speed = 4.f;
 
 public:
    Vector2 getWorldPos() { return m_worldPos; }
@@ -36,9 +36,6 @@ void Character::setScreenPos(int winWidth, int winHeight) {
 }
 
 void Character::tick(float deltaTime) {
-   // 1st, take the code for handling inputs from the while loop and paste it here;
-   // 2nd, change to the member variables
-   // 3rd, add direction instead of subtract to m_worldPos
    // vector and keys to determine the direction among the map
    Vector2 direction{};
    if (IsKeyDown(KEY_A)) direction.x -= 1.0f;
@@ -49,14 +46,23 @@ void Character::tick(float deltaTime) {
    // direction vector used to move the map:
    if (Vector2Length(direction) != 0.0f) { // checks if direction magnitude isn't zero
       m_texture = m_run;
-      // now we'll set m_worldPos to be the sum of m_worldPos + direction (add direction instead of subtracting because now we're changing the character's world position)
       // set m_worldPos = m_worldPos + direction
-      m_worldPos = Vector2Add(m_worldPos, Vector2Scale(Vector2Normalize(direction), speed));      // set the rightLeft variable here:
-      direction.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
+      m_worldPos = Vector2Add(m_worldPos, Vector2Scale(Vector2Normalize(direction), m_speed));      // set the rightLeft variable here:
+      direction.x < 0.f ? m_rightLeft = -1.f : m_rightLeft = 1.f;
    }
    else {
       m_texture = m_idle;
    }
+
+   // add the animation code to tick method
+   // update animation frame
+   m_runningTime += deltaTime;
+   if (m_runningTime >= m_updateTime) {
+      m_frame++;
+      m_runningTime = 0.f;
+      if (m_frame > m_maxFrames) m_frame = 0;
+   }
+
 }
 
 int main() {
