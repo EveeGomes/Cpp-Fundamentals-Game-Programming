@@ -103,7 +103,7 @@ int main() {
       *     This will be done before this draw function is called. And we'll use the Vector2Scale function because we're doing a multiplication of a vector:
       * mapPos = Vector2Scale(knight.getWorldPos(), -1.f);
       * 
-      * So with that, we're getting the character's m_worldPos and flipping it by multiplying it by negative 1!! --->>> this result in mapPos to move in the opposite direction! 
+      * So with that, we're getting the character's m_worldPos and flipping it by multiplying it by negative 1!! --->>> this result in mapPos to move in the opposite direction and the character will stay in the middle of the screen!!
       */
       
       
