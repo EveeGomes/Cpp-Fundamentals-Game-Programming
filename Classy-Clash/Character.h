@@ -18,8 +18,6 @@ class Character {
    float m_rightLeft = 1.f;
    float m_runningTime{};
    int m_frame{};
-
-   // removed const from these variables because const member variables prevent things like copy assignment and move operations!
    int m_maxFrames = 6;
    float m_updateTime = 1.f / 12.f;
    float m_speed = 4.f;

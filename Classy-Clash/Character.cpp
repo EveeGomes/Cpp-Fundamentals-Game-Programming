@@ -8,8 +8,8 @@ Character::Character() {
 
 void Character::setScreenPos(int winWidth, int winHeight) {
    m_screenPos = {
-      (float)winWidth / 2.0f - 4.0f * (0.5f * (float)m_texture.width / 6.0f),
-      (float)winHeight / 2.0f - 4.0f * (0.5f * (float)m_texture.height)
+      (float)winWidth / 2.0f - 4.0f * (0.5f * m_width),
+      (float)winHeight / 2.0f - 4.0f * (0.5f * m_height)
    };
 }
 
@@ -42,7 +42,7 @@ void Character::tick(float deltaTime) {
    }
 
    // draw the character
-   Rectangle srcK{ m_frame * (float)m_texture.width / 6.f, 0.f, m_rightLeft * (float)m_texture.width / 6.f, (float)m_texture.height };
-   Rectangle destK{ m_screenPos.x, m_screenPos.y, 4.0f * (float)m_texture.width / 6.0f, 4.0f * (float)m_texture.height };
+   Rectangle srcK{ m_frame * m_width, 0.f, m_rightLeft * m_width, m_height };
+   Rectangle destK{ m_screenPos.x, m_screenPos.y, 4.0f * m_width, 4.0f * m_height };
    DrawTexturePro(m_texture, srcK, destK, Vector2{}, 0.f, WHITE);
 }
