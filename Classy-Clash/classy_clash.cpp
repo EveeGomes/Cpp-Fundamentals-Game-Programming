@@ -93,11 +93,21 @@ int main() {
       BeginDrawing();
       ClearBackground(WHITE);
 
-      // draw the map
-      DrawTextureEx(map, mapPos, 0.0f, 4.0f, WHITE);
+       mapPos = Vector2Scale(knight.getWorldPos(), -1.f);
 
-      // call tick after drawing the map in order for the character to be on top of the map!
-      knight.tick(GetFrameTime()); // pass GetFrameTime() so tick function receives delta time as parameter!!!
+      // draw the map
+      DrawTextureEx(map, mapPos, 0.0f, 4.0f, WHITE); 
+      /*
+      *  In DrawTextureEx(map, mapPos, 0.0f, 4.0f, WHITE);  mapPos needs to be updated every frame but in tick function we're updating the character's world position (THE WORLD OF THAT CHARACTER!)
+      *     So, we'll use the character's m_worldPos and flip its direction!   --->>> mapPos = -m_worldPos  --->>> mapPos = m_worldPos *(-1) 
+      *     This will be done before this draw function is called. And we'll use the Vector2Scale function because we're doing a multiplication of a vector:
+      * mapPos = Vector2Scale(knight.getWorldPos(), -1.f);
+      * 
+      * So with that, we're getting the character's m_worldPos and flipping it by multiplying it by negative 1!! --->>> this result in mapPos to move in the opposite direction! 
+      */
+      
+      
+      knight.tick(GetFrameTime());
 
       EndDrawing();
    }
