@@ -5,6 +5,7 @@ class Character {
    Texture2D m_texture{ LoadTexture("characters/knight_idle_spritesheet.png") };
    Texture2D m_idle{ LoadTexture("characters/knight_idle_spritesheet.png") };
    Texture2D m_run{ LoadTexture("characters/knight_run_spritesheet.png") };
+
    Vector2 m_screenPos;
    Vector2 m_worldPos;
 
@@ -62,6 +63,11 @@ void Character::tick(float deltaTime) {
       m_runningTime = 0.f;
       if (m_frame > m_maxFrames) m_frame = 0;
    }
+
+   // draw the character
+   Rectangle srcK{ m_frame * (float)m_texture.width / 6.f, 0.f, m_rightLeft * (float)m_texture.width / 6.f, (float)m_texture.height };
+   Rectangle destK{ m_screenPos.x, m_screenPos.y, 4.0f * (float)m_texture.width / 6.0f, 4.0f * (float)m_texture.height };
+   DrawTexturePro(m_texture, srcK, destK, Vector2{}, 0.f, WHITE);
 
 }
 
