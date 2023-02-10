@@ -44,7 +44,7 @@ int main() {
          knight.getWorldPos().y + winDimensions[1] > map.height * mapScale) {
 
          // if any of these are true, then we need to undo the character's movement! We do this by storing the m_worldPos of the last frame
-
+         knight.undoMovement();
       }
 
       EndDrawing();
