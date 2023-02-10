@@ -19,8 +19,7 @@ int main() {
    const float mapScale = 4.f;
 
    // create an instance of Character class
-   Character knight;
-   knight.setScreenPos(winDimensions[0], winDimensions[1]);
+   Character knight(winDimensions[0], winDimensions[1]);
 
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
@@ -34,16 +33,13 @@ int main() {
       DrawTextureEx(map, mapPos, 0.0f, mapScale, WHITE);
       knight.tick(GetFrameTime());
 
-      /*
-      * In tick we're setting the m_worldPos, so we need to check the map bounds AFTER tick is called.
-      */
       // check map's bounds
       if (knight.getWorldPos().x < 0.f ||
          knight.getWorldPos().y < 0.f ||
          knight.getWorldPos().x + winDimensions[0] > map.width * mapScale ||
          knight.getWorldPos().y + winDimensions[1] > map.height * mapScale) {
 
-         // if any of these are true, then we need to undo the character's movement! We do this by storing the m_worldPos of the last frame
+         // if any of these are true, then we need to undo the character's movement
          knight.undoMovement();
       }
 

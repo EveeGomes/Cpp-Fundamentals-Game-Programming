@@ -22,12 +22,13 @@ class Character {
    int m_maxFrames = 6;
    float m_updateTime = 1.f / 12.f;
    float m_speed = 4.f;
-   
+   float m_scale = 4.f;
 
 public:
    Character();
+   Character(int winWidth, int winHeight);
    Vector2 getWorldPos() { return m_worldPos; }
-   void setScreenPos(int winWidth, int winHeight);
+
    // Tick function takes care of what happens at each and every frame
    void tick(float deltaTime);
    void undoMovement();
