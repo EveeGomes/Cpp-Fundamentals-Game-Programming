@@ -41,3 +41,35 @@ To <subtract>, the vector B only changes direction, therefore it now has a negat
 The result C also keeps tail and head on A's tail and B's head
 
 -> Raylib has a math library with Vector Operations!!!
+
+-----------------------------------------------------------------------------------------------------------------------------
+About the movement on the game
+
+- Actually what's moving is the map!
+- This way, if we want the character to go down for example, we have to move the map up (the opposite direction: negative value!!!)
+check: https://jamboard.google.com/d/1U81YhDkoOs8dPAlRORrGU5y-thsslhvwECnq85Oa9rY/viewer?f=0
+and use the arrow to move the map according to the keys pressed!
+
+- So it's used a Vector2 direction in the code to represent the direction we want to move
+If we press A, we want the character to move to the left, so the map should move to the right to give this impression. 
+To accomplish that, 
+	1st. we set the direction we want to move accoding to the key that's being pressed:
+		key A: we use vec direction x's component and subtract -1.f since the direction we want is to go to the left!
+		key W: we use direction y's component and subtract -1.f because we want to move up 
+
+-> Again, we need to find the direction we want to go then we flip the vector to the opposite direction by flipping its sign!!!!
+
+- The mapPos vector is placed outside the while loop so we can save its original position which is (0,0)!!!
+
+- Once we've set the keys to the direction values:
+	1. check if direction magnitude isn't zero, cuz if it is we don't wanna move (use Vector2Length())
+	2. when it's not zero we need to normalize the value of vector magnitude in order to avoid moving faster in diagonal
+	3. using that normalized value, we gotta pass to the function that's responsible to the subtraction of vectors;
+		that's because once we have the direction set (from pressing a key), we have to flip its direction, meaning we need to use - sign to accomplish it:
+	mapPos = Vector2Subtract(mapPos, Vector2Normalize(direction));  --->>> mapPos = mapPos - direction <<<---
+	4. then we add a value to scale the movement vector using raymath library function and a float called speed and set to 4.f
+	mapPos = Vector2Subtract(mapPos, Vector2Scale(Vector2Normalize(direction), speed));
+
+At the end, what's really happening is that mapPos which was (0.0, 0.0), will now be set, in that frame, to the value returned by Vector2Subtract.
+And this will simulate a "slide" of the map on the screen to the opposite direction we want to go giving the final impression of movement.
+
