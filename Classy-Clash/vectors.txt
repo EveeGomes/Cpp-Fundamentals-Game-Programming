@@ -3,3 +3,41 @@ Vectors are used to represent: Direction
 
 They can be used to facilitate MOVEMENT in the video game
 
+- 2 main properties: direction 
+				     magnitude (represented by the length of the vector)
+- It can be broken down into components:
+2d vector = x and y components
+
+These two components combined to make the vector!!
+y
+|
+|   / vector
+|  /
+| /
+|/______x
+
+Basically x and y would be the distance needed to travel to get to the end of the vector
+- To find the the length of the vector, we can take the triangle that's formed with the vector and its components;
+-	the vector is this case is the side opposite to the right angle = the hypotenuse, so we can use the equation for that
+vector2 = x2 + y2 (if x and y have value of 1)
+vector2 ~ 1.414
+
+Thinking of vector in a game window:
+
+- The position of a character is like a vector that goes from the origin coordinates of the window (0,0) to the upper left (also origin) of this character
+- So to move the character to a new position, we use another vector which points to the new position;
+	then, to find the new position vector we add the previous position with the move vector:
+	pos + move = newPos
+But, to do that addition, we do in a component y's addition:
+	x = pos.x + move.x
+	y = pos.y + move.y
+
+Adding vectors we place the tale of one vector to the head of the added vector:
+	A + B (tail of B is on the head of A)
+And the result vector, C, will have its tail in A's tail and will match its head to B's head
+
+To <subtract>, the vector B only changes direction, therefore it now has a negative sign, but still it's tail starts at A's head.
+	A + (-B) = C
+The result C also keeps tail and head on A's tail and B's head
+
+-> Raylib has a math library with Vector Operations!!!
