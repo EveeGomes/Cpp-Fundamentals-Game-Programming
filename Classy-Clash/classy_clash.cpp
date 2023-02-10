@@ -16,6 +16,7 @@ int main() {
    // load the map texture
    Texture2D map = LoadTexture("nature_tileset/OpenWorldMap24x24.png");
    Vector2 mapPos{ 0.0, 0.0 };
+   const float mapScale = 4.f;
 
    // create an instance of Character class
    Character knight;
@@ -30,8 +31,21 @@ int main() {
       mapPos = Vector2Scale(knight.getWorldPos(), -1.f);
 
       // draw the map
-      DrawTextureEx(map, mapPos, 0.0f, 4.0f, WHITE);
+      DrawTextureEx(map, mapPos, 0.0f, mapScale, WHITE);
       knight.tick(GetFrameTime());
+
+      /*
+      * In tick we're setting the m_worldPos, so we need to check the map bounds AFTER tick is called.
+      */
+      // check map's bounds
+      if (knight.getWorldPos().x < 0.f ||
+         knight.getWorldPos().y < 0.f ||
+         knight.getWorldPos().x + winDimensions[0] > map.width * mapScale ||
+         knight.getWorldPos().y + winDimensions[1] > map.height * mapScale) {
+
+         // if any of these are true, then we need to undo the character's movement! We do this by storing the m_worldPos of the last frame
+
+      }
 
       EndDrawing();
    }
