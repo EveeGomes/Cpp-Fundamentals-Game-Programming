@@ -51,5 +51,5 @@ void Character::tick(float deltaTime) {
 }
 
 void Character::undoMovement() {
-   m_worldPos = m_worldPosLastFrame;
+   m_worldPos = m_worldPosLastFrame; 
 }
