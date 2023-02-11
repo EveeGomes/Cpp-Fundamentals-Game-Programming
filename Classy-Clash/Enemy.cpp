@@ -1,5 +1,7 @@
 #include "Enemy.h"
 
+Enemy::Enemy() {}
+
 Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture) : 
    m_worldPos(pos), 
    m_texture(idle_texture), 

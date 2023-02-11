@@ -25,6 +25,7 @@ class Enemy {
    float m_scale = 4.f;
 
 public:
+   Enemy();
    Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture);
    Vector2 getWorldPos() { return m_worldPos; }
    // Tick function takes care of what happens at each and every frame
