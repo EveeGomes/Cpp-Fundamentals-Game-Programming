@@ -7,7 +7,6 @@ Character::Character(int winWidth, int winHeight) {
    m_width = m_texture.width / m_maxFrames;
    m_height = m_texture.height;
    m_screenPos = {
-      // instead of using a C casting type, which is dangerous as it doesn't check for the type it's casting to/from, here we'll change to a C++ casting function that checks the types at compile time and prevents casting incompatible types!
       static_cast<float>(winWidth) / 2.0f - m_scale * (0.5f * m_width),
       static_cast<float>(winHeight) / 2.0f - m_scale * (0.5f * m_height)
    };
@@ -34,8 +33,7 @@ void Character::tick(float deltaTime) {
    else {
       m_texture = m_idle;
    }
-
-   // add the animation code to tick method
+   
    // update animation frame
    m_runningTime += deltaTime;
    if (m_runningTime >= m_updateTime) {

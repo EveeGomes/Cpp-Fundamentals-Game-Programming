@@ -3,6 +3,7 @@
 #define PROP_H
 
 #include "raylib.h"
+
 class Prop {
    Texture2D m_texture{};
    Vector2 m_worldPos{};
