@@ -32,5 +32,6 @@ public:
    // Tick function takes care of what happens at each and every frame
    void tick(float deltaTime);
    void undoMovement();
+   Rectangle getCollisionRec();
 };
 #endif // !CHARACTER_H

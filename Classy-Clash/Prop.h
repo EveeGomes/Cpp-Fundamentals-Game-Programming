@@ -12,6 +12,7 @@ public:
    Prop();
    Prop(Texture2D tex, Vector2 pos);
    void Render(Vector2 knightPos);
+   Rectangle getCollisionRec(Vector2 knightPos);
 };
 
 #endif // !PROP_H
