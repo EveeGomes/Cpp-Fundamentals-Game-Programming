@@ -13,8 +13,8 @@ Character::Character(int winWidth, int winHeight) {
 }
 
 void Character::tick(float deltaTime) {
-   // first thing to do: set m_worldPosLastFrame to m_worldPos
-   m_worldPosLastFrame = m_worldPos;
+   // call the base class tick version
+   BaseCharacter::tick(deltaTime);
 
    // vector and keys to determine the direction among the map
    Vector2 direction{};
@@ -33,17 +33,4 @@ void Character::tick(float deltaTime) {
    else {
       m_texture = m_idle;
    }
-   
-   // update animation frame
-   m_runningTime += deltaTime;
-   if (m_runningTime >= m_updateTime) {
-      m_frame++;
-      m_runningTime = 0.f;
-      if (m_frame > m_maxFrames) m_frame = 0;
-   }
-
-   // draw the character
-   Rectangle srcK{ m_frame * m_width, 0.f, m_rightLeft * m_width, m_height };
-   Rectangle destK{ m_screenPos.x, m_screenPos.y, m_scale * m_width, m_scale * m_height };
-   DrawTexturePro(m_texture, srcK, destK, Vector2{}, 0.f, WHITE);
 }

@@ -12,19 +12,7 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture) {
 }
 
 void Enemy::tick(float deltaTime) {
-   m_worldPosLastFrame = m_worldPos;
-
-   // update animation frame
-   m_runningTime += deltaTime;
-   if (m_runningTime >= m_updateTime) {
-      m_frame++;
-      m_runningTime = 0.f;
-      if (m_frame > m_maxFrames) m_frame = 0;
-   }
-
-   // draw the character
-   Rectangle srcK{ m_frame * m_width, 0.f, m_rightLeft * m_width, m_height };
-   Rectangle destK{ m_screenPos.x, m_screenPos.y, m_scale * m_width, m_scale * m_height };
-   DrawTexturePro(m_texture, srcK, destK, Vector2{}, 0.f, WHITE);
-
+   // all that's needed here is to call the base class version of tick;
+   // **** important **** if we didn't want any extra functionality into this Enemy version of tick, we wouldn't need to override here in this class; it would be used since this is a derived class alread (just like the other functions - getWorldPos() etc)
+   BaseCharacter::tick(deltaTime);
 }

@@ -29,7 +29,7 @@ protected:
 
 public:
    BaseCharacter();
-
+   virtual void tick(float deltaTime);
    Vector2 getWorldPos() { return m_worldPos; }
    void undoMovement();
    Rectangle getCollisionRec();
