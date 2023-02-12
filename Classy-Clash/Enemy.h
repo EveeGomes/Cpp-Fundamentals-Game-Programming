@@ -2,9 +2,10 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
+#include "BaseCharacter.h"
 #include "raylib.h"
 
-class Enemy {
+class Enemy : public BaseCharacter {
    Texture2D m_texture{ LoadTexture("characters/knight_idle_spritesheet.png") };
    Texture2D m_idle{ LoadTexture("characters/knight_idle_spritesheet.png") };
    Texture2D m_run{ LoadTexture("characters/knight_run_spritesheet.png") };
