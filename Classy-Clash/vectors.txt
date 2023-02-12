@@ -73,3 +73,19 @@ To accomplish that,
 At the end, what's really happening is that mapPos which was (0.0, 0.0), will now be set, in that frame, to the value returned by Vector2Subtract.
 And this will simulate a "slide" of the map on the screen to the opposite direction we want to go giving the final impression of movement.
 
+-----------------------------------------------------------------------------------------------------------------------------
+Formula to get from one object to another!
+Check again the class 79. Enemy AI
+
+A: the vector from the beginning of the screen (0,0) to the goblin
+C: vector from the the beginning of the screen (0,0) to the knight
+B: is the distance from the goblin to the knight, which is the same as the direction we need to point the vector so the goblin can chase the knight!
+
+B = C - A (check the pictuce in the video ~ min 1:23)
+
+The formula comes from: 
+	the vector from a source location to a destination location is equal to the position vector of the destination location MINUS the position vector of the source location
+	toTarget = target position vector - enemy position vector
+That needs to be updated each and every frame since the locations are constantly changing from frame to frame
+
+
