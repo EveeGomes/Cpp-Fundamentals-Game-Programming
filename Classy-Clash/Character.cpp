@@ -13,7 +13,6 @@ Character::Character(int winWidth, int winHeight) {
 }
 
 void Character::tick(float deltaTime) {
-   // call the base class tick version
    BaseCharacter::tick(deltaTime);
 
    // vector and keys to determine the direction among the map

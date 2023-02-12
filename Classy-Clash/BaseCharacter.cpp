@@ -4,7 +4,7 @@
 BaseCharacter::BaseCharacter() {}
 
 void BaseCharacter::tick(float deltaTime) {
-   // first thing to do: set m_worldPosLastFrame to m_worldPos
+   // first thing to do:
    m_worldPosLastFrame = m_worldPos;
 
    // update animation frame
