@@ -12,6 +12,7 @@ public:
    Enemy();
    Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture);
    void setTarget(Character* character) { m_target = character; }
+   virtual Vector2 getScreenPos();
    virtual void tick(float deltaTime);
 };
 

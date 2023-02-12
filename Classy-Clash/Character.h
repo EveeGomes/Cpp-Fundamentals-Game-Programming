@@ -6,11 +6,14 @@
 #include "raylib.h"
 
 class Character : public BaseCharacter {
+   int m_windowWidth{};
+   int m_windowHeight{};
+
 public:
    Character();
    Character(int winWidth, int winHeight);
    Vector2 getWorldPos() { return m_worldPos; }
-   Vector2 getScreenPos() { return m_screenPos; }
+   virtual Vector2 getScreenPos();
    virtual void tick(float deltaTime);
 };
 #endif // !CHARACTER_H
