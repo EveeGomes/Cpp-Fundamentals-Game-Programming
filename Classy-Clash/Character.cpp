@@ -27,16 +27,26 @@ void Character::tick(float deltaTime) {
    BaseCharacter::tick(deltaTime);
 
    Vector2 origin{};
-   // also, we'll also offset the sword; without it, the weapon would be in a upper position in relation to the character
-   //    this offset will be added to the dest Rect in the x and y components
    Vector2 offset{};
    if (m_rightLeft > 0.f) {
       origin = { 0.f, m_weapon.height * m_scale };
       offset = { 38.f, 55.f };
+      m_weaponCollisionRec = {
+         getScreenPos().x + offset.x,
+         getScreenPos().y + offset.y - m_weapon.height * m_scale,
+         m_weapon.width * m_scale,
+         m_weapon.height * m_scale
+      };
    }
    else {
       origin = { m_weapon.width * m_scale, m_weapon.height * m_scale };
       offset = { 25.f, 55.f };
+      m_weaponCollisionRec = {
+         getScreenPos().x + offset.x - m_weapon.width * m_scale,
+         getScreenPos().y + offset.y - m_weapon.height * m_scale,
+         m_weapon.width * m_scale,
+         m_weapon.height * m_scale
+      };
    }
 
    // draw the sword
@@ -44,11 +54,21 @@ void Character::tick(float deltaTime) {
    Rectangle dest{ getScreenPos().x + offset.x, getScreenPos().y + offset.y, m_weapon.width * m_scale, m_weapon.height * m_scale };
    DrawTexturePro(m_weapon, source, dest, origin, 0.f, WHITE);
 
+   // using the following function, it's possible to see the Rectangle's lines! In this case we're passing the dest Rectangle information
+   DrawRectangleLines(
+      //getScreenPos().x + offset.x, getScreenPos().y + offset.y, m_weapon.width * m_scale, m_weapon.height * m_scale, RED
+      // now instead of the dest Rec, we'll use the m_weaponCollisionRec
+      m_weaponCollisionRec.x,
+      m_weaponCollisionRec.y,
+      m_weaponCollisionRec.width,
+      m_weaponCollisionRec.height,
+      RED
+   );
    /**
-   * origin vector in DrawTexturePro:
-   *  bottom left of weapon texture when character texture is facing right (m_rightLeft > 0.f)
-   *  bottom right of weapon texture when character texture is facing left
-   * These positions are important for the rotation to give the impression of swinging the sword
+   * the rectangle is below the sword and that's because we've set it to be in the bottom;
+   * so the thing to do now is to move the rectangle up by the height of the texture when the character is facing right, and when facing left we'll also need to move left by the width of the weapon texture
+   * 
+   * Another rectangle member will be added to this Character class called m_weaponCollisionRec that'll be set in this tick function
    */
    
 }
