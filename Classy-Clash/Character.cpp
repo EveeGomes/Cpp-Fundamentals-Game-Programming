@@ -26,13 +26,29 @@ void Character::tick(float deltaTime) {
 
    BaseCharacter::tick(deltaTime);
 
+   Vector2 origin{};
+   // also, we'll also offset the sword; without it, the weapon would be in a upper position in relation to the character
+   //    this offset will be added to the dest Rect in the x and y components
+   Vector2 offset{};
+   if (m_rightLeft > 0.f) {
+      origin = { 0.f, m_weapon.height * m_scale };
+      offset = { 38.f, 55.f };
+   }
+   else {
+      origin = { m_weapon.width * m_scale, m_weapon.height * m_scale };
+      offset = { 25.f, 55.f };
+   }
+
    // draw the sword
-   Rectangle source{ 0.f, 0.f, static_cast<float>(m_weapon.width) * m_rightLeft, static_cast<float>(m_weapon.height) }; // the width and height coming from Texture2D type are int, that's why we cast them to float so it can be compatible with the type float of width and height of the rectangle!
-   Rectangle dest{ getScreenPos().x, getScreenPos().y, m_weapon.width * m_scale, m_weapon.height * m_scale }; // for now we're using getScreePos() // also, since m_scale is a float, multiplying it by the width and height will result in a float. That's why we don't need to cast it
-   DrawTexturePro(m_weapon, source, dest, {}, 0.f, WHITE);
+   Rectangle source{ 0.f, 0.f, static_cast<float>(m_weapon.width) * m_rightLeft, static_cast<float>(m_weapon.height) };
+   Rectangle dest{ getScreenPos().x + offset.x, getScreenPos().y + offset.y, m_weapon.width * m_scale, m_weapon.height * m_scale };
+   DrawTexturePro(m_weapon, source, dest, origin, 0.f, WHITE);
 
    /**
-   * With these values, the position of the sword isn't correct: upper left corner of the sword is the same as the upper left corner of the character's texture
-   * Also, for testing, we'll turn off the Enemy's behavior for now by commenting out the call for the tick function of the base class in Enemy.cpp. This will prevent not only the Enemy to chase the Character but also to render it on the main function
+   * origin vector in DrawTexturePro:
+   *  bottom left of weapon texture when character texture is facing right (m_rightLeft > 0.f)
+   *  bottom right of weapon texture when character texture is facing left
+   * These positions are important for the rotation to give the impression of swinging the sword
    */
+   
 }
