@@ -15,17 +15,15 @@ void BaseCharacter::tick(float deltaTime) {
       if (m_frame > m_maxFrames) m_frame = 0;
    }
 
-   // we'll use m_velocity, instead of direction we used before, to update the world position of the character/enemy and then after updating the position, the m_velocity vector should be back to zero to in the next frame receive the updated value from the derived classes
-   if (Vector2Length(m_velocity) != 0.0f) { // checks if direction magnitude isn't zero
-      // set m_worldPos = m_worldPos + m_velocity
-      m_worldPos = Vector2Add(m_worldPos, Vector2Scale(Vector2Normalize(m_velocity), m_speed));      // set the rightLeft variable here:
+   if (Vector2Length(m_velocity) != 0.0f) {
+      m_worldPos = Vector2Add(m_worldPos, Vector2Scale(Vector2Normalize(m_velocity), m_speed));
       m_velocity.x < 0.f ? m_rightLeft = -1.f : m_rightLeft = 1.f;
       m_texture = m_run;
    }
    else {
       m_texture = m_idle;
    }
-   m_velocity = {}; // this zero out the vector2! 
+   m_velocity = {};
 
    // draw the character
    Rectangle srcK{ m_frame * m_width, 0.f, m_rightLeft * m_width, m_height };

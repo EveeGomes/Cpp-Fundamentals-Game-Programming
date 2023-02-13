@@ -8,7 +8,7 @@
 class Character : public BaseCharacter {
    int m_windowWidth{};
    int m_windowHeight{};
-
+   Texture2D m_weapon{LoadTexture("characters/weapon_sword.png")};
 public:
    Character();
    Character(int winWidth, int winHeight);

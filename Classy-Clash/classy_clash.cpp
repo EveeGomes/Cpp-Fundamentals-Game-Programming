@@ -47,7 +47,8 @@ int main() {
 
       // draw the map
       DrawTextureEx(map, mapPos, 0.0f, mapScale, WHITE);
-      // render/draw the props - using for ranged loop
+
+      // render/draw the props
       for (auto prop : props) {
          prop.Render(knight.getWorldPos());
       }
@@ -71,7 +72,6 @@ int main() {
          }
       }
 
-      // call tick for the goblin
       goblin.tick(GetFrameTime());
 
       EndDrawing();

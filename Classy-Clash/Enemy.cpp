@@ -14,10 +14,9 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture) {
 }
 
 void Enemy::tick(float deltaTime) {
-   
+   // get to target
    m_velocity = Vector2Subtract(m_target->getScreenPos(), getScreenPos());
-   // in base's tick() there's already the code to normalize, scale and add m_velocity
-   BaseCharacter::tick(deltaTime);
+   //BaseCharacter::tick(deltaTime);
 }
 
 Vector2 Enemy::getScreenPos() {

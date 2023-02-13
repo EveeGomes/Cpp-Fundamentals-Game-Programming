@@ -14,10 +14,6 @@ protected:
    float m_width{};
    float m_height{};
 
-   /*Vector2 m_screenPos{};
-   * instead of using a variable, there'll be a getter that's pure virtual and can be ovewritten in any derived class using different code for their own purpose.
-   * the existence of a pure virtual function makes a class as an abstract one!
-   */
    Vector2 m_worldPos{};
    Vector2 m_worldPosLastFrame{};
 
@@ -29,8 +25,6 @@ protected:
    float m_updateTime = 1.f / 12.f;
    float m_speed = 4.f;
    float m_scale = 4.f;
-   // this vector2 will be used for updating both enemy and character's position
-   //    it'll contain information regarding the movement direction and the distance each frame should move
    Vector2 m_velocity{};
 
 public:
