@@ -19,13 +19,13 @@ Vector2 Enemy::getScreenPos() const {
 }
 
 void Enemy::tick(float deltaTime) {
-   if (!getAlive()) return; // this return will end the function here and return to main()
+   if (!getAlive()) return;
    // get to target
    m_velocity = Vector2Subtract(m_target->getScreenPos(), getScreenPos());
-   if (Vector2Length(m_velocity) < m_radius) m_velocity = {}; // set it to zero since we don't want any movement when the enemy reaches that radius distance from the character! 
+   if (Vector2Length(m_velocity) < m_radius) m_velocity = {}; 
    BaseCharacter::tick(deltaTime);
    
    if (CheckCollisionRecs(m_target->getCollisionRec(), getCollisionRec())) {
-      m_target->takeDamage(m_damagePerSec * deltaTime); // * deltaTime to get the exactly amount of damage we need for a single frame, which will be equivalente to 10 damage per second
+      m_target->takeDamage(m_damagePerSec * deltaTime);
    }
 }

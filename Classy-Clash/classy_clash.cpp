@@ -8,21 +8,19 @@
 
 int main() {
 
-   // window dimensions array
-   int winDimensions[2]{};
-   winDimensions[0] = 384; // width
-   winDimensions[1] = 384; // height
+   // window dimensions
+   int windowWidth = 384;
+   int windowHeight = 384;
 
-   // initialize the window
-   InitWindow(winDimensions[0], winDimensions[1], "Classy Clash Game");
+   InitWindow(windowWidth, windowHeight, "Classy Clash Game");
 
    // load the map texture
-   Texture2D map = LoadTexture("nature_tileset/OpenWorldMap24x24.png"); // firstWorldMap  OpenWorldMap24x24
+   Texture2D map = LoadTexture("nature_tileset/OpenWorldMap24x24.png");
    Vector2 mapPos{ 0.0, 0.0 };
    const float mapScale = 4.f;
 
    // create an instance of Character class
-   Character knight(winDimensions[0], winDimensions[1]);
+   Character knight(windowWidth, windowHeight);
 
    // create a Prop instance array
    Prop props[2]{
@@ -30,14 +28,32 @@ int main() {
       Prop(LoadTexture("nature_tileset/Log.png"), Vector2{400.f, 500.f})
    };
 
-   // create an Enemy instance
+   // create Enemy instances
    Enemy goblin(
-      Vector2{}, 
+      Vector2{800.f, 800.f}, 
       LoadTexture("characters/goblin_idle_spritesheet.png"), 
       LoadTexture("characters/goblin_run_spritesheet.png")
    );
-   goblin.setTarget(&knight);
 
+   Enemy slime(
+      Vector2{500.f, 700.f},
+      LoadTexture("characters/slime_idle_spritesheet.png"),
+      LoadTexture("characters/slime_run_spritesheet.png")
+   );
+   // no setTarget???
+
+   // create more enemies!!!
+   Enemy* enemies[]{
+      // add the addresses of the enemies!     // same as: int numbers[]{ 1,2 };
+      &goblin,
+      &slime
+   };  
+
+   for (auto enemy : enemies) {
+      enemy->setTarget(&knight); // we use the arrow operator because each elm in enemies is a pointer!
+   }
+   //goblin.setTarget(&knight); // instead of setting only one enemy, we use the for-ranged loop above!
+   
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
       BeginDrawing();
@@ -71,8 +87,8 @@ int main() {
       // check map's bounds
       if (knight.getWorldPos().x < 0.f ||
          knight.getWorldPos().y < 0.f ||
-         knight.getWorldPos().x + winDimensions[0] > map.width * mapScale ||
-         knight.getWorldPos().y + winDimensions[1] > map.height * mapScale) {
+         knight.getWorldPos().x + windowWidth > map.width * mapScale ||
+         knight.getWorldPos().y + windowHeight > map.height * mapScale) {
 
          // if any of these are true, then we need to undo the character's movement
          knight.undoMovement();
@@ -85,12 +101,17 @@ int main() {
          }
       }
 
-      goblin.tick(GetFrameTime());
+      //goblin.tick(GetFrameTime());
+      for (auto enemy : enemies) {
+         enemy->tick(GetFrameTime());
+      }
 
       // check for weapon collision
       if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-         if (CheckCollisionRecs(goblin.getCollisionRec(), knight.getWeaponCollisionRec())) {
-            goblin.setAlive(false);
+         for (auto enemy : enemies) {
+            if (CheckCollisionRecs(enemy->getCollisionRec(), knight.getWeaponCollisionRec())) {
+               enemy->setAlive(false);
+            }
          }
       }
 

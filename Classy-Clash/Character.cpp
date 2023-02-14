@@ -68,12 +68,4 @@ void Character::tick(float deltaTime) {
    Rectangle dest{ getScreenPos().x + offset.x, getScreenPos().y + offset.y, m_weapon.width * m_scale, m_weapon.height * m_scale };
    DrawTexturePro(m_weapon, source, dest, origin, rotation, WHITE);
    // due to setting the origin vector to the bottom left and bottom right corners, the sword is "facing" down
-
-   DrawRectangleLines(
-      m_weaponCollisionRec.x,
-      m_weaponCollisionRec.y,
-      m_weaponCollisionRec.width,
-      m_weaponCollisionRec.height,
-      RED
-   );
 }
