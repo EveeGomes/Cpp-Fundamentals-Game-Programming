@@ -22,6 +22,7 @@ void Enemy::tick(float deltaTime) {
    if (!getAlive()) return; // this return will end the function here and return to main()
    // get to target
    m_velocity = Vector2Subtract(m_target->getScreenPos(), getScreenPos());
+   if (Vector2Length(m_velocity) < m_radius) m_velocity = {}; // set it to zero since we don't want any movement when the enemy reaches that radius distance from the character! 
    BaseCharacter::tick(deltaTime);
    
    if (CheckCollisionRecs(m_target->getCollisionRec(), getCollisionRec())) {

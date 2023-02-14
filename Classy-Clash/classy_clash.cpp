@@ -57,8 +57,6 @@ int main() {
       // draw the character's health or Game Over
       if (!knight.getAlive()) {
          DrawText("Game Over!", 55.f, 45.f, 40, RED);
-         // since the character is no longer alive, nothing after this if statement is needed anymore, so it should go to the next iteration instead;
-         // so  we'll call EndDrawing() (to clear the window appropriately) and use continue keyword which will ignore the rest of the loop code and start a new iteration
          EndDrawing();
          continue;
       }
