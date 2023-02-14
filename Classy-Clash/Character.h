@@ -10,12 +10,16 @@ class Character : public BaseCharacter {
    int m_windowHeight{};
    Texture2D m_weapon{LoadTexture("characters/weapon_sword.png")};
    Rectangle m_weaponCollisionRec{};
+   float m_health = 100.f;
 public:
    Character();
    Character(int winWidth, int winHeight);
-   Vector2 getWorldPos() { return m_worldPos; }
-   virtual Vector2 getScreenPos();
-   Rectangle getWeaponCollisionRec() { return m_weaponCollisionRec; }
+
+   Vector2 getWorldPos() const { return m_worldPos; }
+   virtual Vector2 getScreenPos() const;
+   Rectangle getWeaponCollisionRec() const { return m_weaponCollisionRec; }
+   float getHealth() const { return m_health; }
+   
    virtual void tick(float deltaTime);
 };
 #endif // !CHARACTER_H

@@ -3,6 +3,15 @@
 
 BaseCharacter::BaseCharacter() {}
 
+Rectangle BaseCharacter::getCollisionRec() const {
+   return Rectangle{
+      getScreenPos().x,
+      getScreenPos().y,
+      m_width * m_scale,
+      m_height * m_scale
+   };
+}
+
 void BaseCharacter::tick(float deltaTime) {
    // first thing to do:
    m_worldPosLastFrame = m_worldPos;
@@ -33,13 +42,4 @@ void BaseCharacter::tick(float deltaTime) {
 
 void BaseCharacter::undoMovement() {
    m_worldPos = m_worldPosLastFrame;
-}
-
-Rectangle BaseCharacter::getCollisionRec() {
-   return Rectangle{
-      getScreenPos().x,
-      getScreenPos().y,
-      m_width * m_scale,
-      m_height * m_scale
-   };
 }

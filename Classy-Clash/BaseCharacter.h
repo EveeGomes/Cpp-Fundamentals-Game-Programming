@@ -30,13 +30,16 @@ protected:
 
 public:
    BaseCharacter();
-   virtual void tick(float deltaTime);
-   virtual Vector2 getScreenPos() = 0;
-   Vector2 getWorldPos() { return m_worldPos; }
-   bool getAlive() { return m_alive; }
+   
+   virtual Vector2 getScreenPos() const = 0;
+   Vector2 getWorldPos() const { return m_worldPos; }
+   bool getAlive() const { return m_alive; }
+   Rectangle getCollisionRec() const;
+   
    void setAlive(bool isAlive) { m_alive = isAlive; }
+   virtual void tick(float deltaTime);
    void undoMovement();
-   Rectangle getCollisionRec();
+   
 };
 
 #endif // !BASE_CHARACTER_H

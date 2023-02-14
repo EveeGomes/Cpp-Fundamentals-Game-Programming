@@ -13,13 +13,14 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture) {
    m_speed = 3.5f;
 }
 
+
+Vector2 Enemy::getScreenPos() const {
+   return Vector2Subtract(m_worldPos, m_target->getWorldPos());
+}
+
 void Enemy::tick(float deltaTime) {
    if (!getAlive()) return; // this return will end the function here and return to main()
    // get to target
    m_velocity = Vector2Subtract(m_target->getScreenPos(), getScreenPos());
    BaseCharacter::tick(deltaTime);
-}
-
-Vector2 Enemy::getScreenPos() {
-   return Vector2Subtract(m_worldPos, m_target->getWorldPos());
 }

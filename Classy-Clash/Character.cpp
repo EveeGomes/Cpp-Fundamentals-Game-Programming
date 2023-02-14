@@ -11,7 +11,7 @@ Character::Character(int winWidth, int winHeight) :
    m_height = m_texture.height;
 }
 
-Vector2 Character::getScreenPos() {
+Vector2 Character::getScreenPos() const {
    return Vector2{
       static_cast<float>(m_windowWidth) / 2.0f - m_scale * (0.5f * m_width),
       static_cast<float>(m_windowHeight) / 2.0f - m_scale * (0.5f * m_height)
