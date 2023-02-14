@@ -15,6 +15,7 @@ public:
    Character(int winWidth, int winHeight);
    Vector2 getWorldPos() { return m_worldPos; }
    virtual Vector2 getScreenPos();
+   Rectangle getWeaponCollisionRec() { return m_weaponCollisionRec; }
    virtual void tick(float deltaTime);
 };
 #endif // !CHARACTER_H
