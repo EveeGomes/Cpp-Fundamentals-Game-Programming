@@ -40,19 +40,16 @@ int main() {
       LoadTexture("characters/slime_idle_spritesheet.png"),
       LoadTexture("characters/slime_run_spritesheet.png")
    );
-   // no setTarget???
 
    // create more enemies!!!
    Enemy* enemies[]{
-      // add the addresses of the enemies!     // same as: int numbers[]{ 1,2 };
       &goblin,
       &slime
    };  
 
    for (auto enemy : enemies) {
-      enemy->setTarget(&knight); // we use the arrow operator because each elm in enemies is a pointer!
+      enemy->setTarget(&knight);
    }
-   //goblin.setTarget(&knight); // instead of setting only one enemy, we use the for-ranged loop above!
    
    SetTargetFPS(60);
    while (!WindowShouldClose()) {
@@ -82,6 +79,7 @@ int main() {
          DrawText(knightHealth.c_str(), 55.f, 45.f, 40, RED);
       }
 
+      // update the knight
       knight.tick(GetFrameTime());
 
       // check map's bounds
@@ -101,7 +99,7 @@ int main() {
          }
       }
 
-      //goblin.tick(GetFrameTime());
+      // update the enemies
       for (auto enemy : enemies) {
          enemy->tick(GetFrameTime());
       }

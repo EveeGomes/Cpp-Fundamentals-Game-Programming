@@ -24,7 +24,7 @@ void Character::takeDamage(float damage) {
 }
 
 void Character::tick(float deltaTime) {
-   if (!getAlive()) return; // this return will end the function here and return to main()
+   if (!getAlive()) return;
 
    if (IsKeyDown(KEY_A)) m_velocity.x -= 1.0f;
    if (IsKeyDown(KEY_D)) m_velocity.x += 1.0f;
@@ -46,7 +46,7 @@ void Character::tick(float deltaTime) {
          m_weapon.width * m_scale,
          m_weapon.height * m_scale
       };
-      // we'll set rotation to 35.f (35 degrees) only if the left mouse button is pressed:
+
       rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? 35.f : 0.f;
    }
    else {
@@ -59,7 +59,7 @@ void Character::tick(float deltaTime) {
          m_weapon.width * m_scale,
          m_weapon.height * m_scale
       };
-      // we'll set rotation to -35.f only if the left mouse button is pressed:
+
       rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? -35.f : 0.f;
    }
 
@@ -67,5 +67,4 @@ void Character::tick(float deltaTime) {
    Rectangle source{ 0.f, 0.f, static_cast<float>(m_weapon.width) * m_rightLeft, static_cast<float>(m_weapon.height) };
    Rectangle dest{ getScreenPos().x + offset.x, getScreenPos().y + offset.y, m_weapon.width * m_scale, m_weapon.height * m_scale };
    DrawTexturePro(m_weapon, source, dest, origin, rotation, WHITE);
-   // due to setting the origin vector to the bottom left and bottom right corners, the sword is "facing" down
 }
