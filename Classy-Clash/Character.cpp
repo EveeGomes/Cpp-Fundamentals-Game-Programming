@@ -19,6 +19,8 @@ Vector2 Character::getScreenPos() {
 }
 
 void Character::tick(float deltaTime) {
+   if (!getAlive()) return; // this return will end the function here and return to main()
+
    if (IsKeyDown(KEY_A)) m_velocity.x -= 1.0f;
    if (IsKeyDown(KEY_D)) m_velocity.x += 1.0f;
    if (IsKeyDown(KEY_W)) m_velocity.y -= 1.0f;
@@ -31,7 +33,7 @@ void Character::tick(float deltaTime) {
    float rotation{};
    if (m_rightLeft > 0.f) {
       origin = { 0.f, m_weapon.height * m_scale };
-      offset = { 38.f, 55.f };
+      offset = { 37.f, 54.f };
       
       m_weaponCollisionRec = {
          getScreenPos().x + offset.x,
@@ -39,11 +41,12 @@ void Character::tick(float deltaTime) {
          m_weapon.width * m_scale,
          m_weapon.height * m_scale
       };
-      rotation = 35.f;
+      // we'll set rotation to 35.f (35 degrees) only if the left mouse button is pressed:
+      rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? 35.f : 0.f;
    }
    else {
       origin = { m_weapon.width * m_scale, m_weapon.height * m_scale };
-      offset = { 25.f, 55.f };      
+      offset = { 26.f, 54.f };      
       
       m_weaponCollisionRec = {
          getScreenPos().x + offset.x,
@@ -51,7 +54,8 @@ void Character::tick(float deltaTime) {
          m_weapon.width * m_scale,
          m_weapon.height * m_scale
       };
-      rotation = -35.f;
+      // we'll set rotation to -35.f only if the left mouse button is pressed:
+      rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? -35.f : 0.f;
    }
 
    // draw the sword

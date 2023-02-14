@@ -4,6 +4,7 @@
 #include "raylib.h"
 
 class BaseCharacter {
+   bool m_alive = true;
 protected:
    /*Texture2D m_texture{};
    Texture2D m_idle{};
@@ -32,6 +33,8 @@ public:
    virtual void tick(float deltaTime);
    virtual Vector2 getScreenPos() = 0;
    Vector2 getWorldPos() { return m_worldPos; }
+   bool getAlive() { return m_alive; }
+   void setAlive(bool isAlive) { m_alive = isAlive; }
    void undoMovement();
    Rectangle getCollisionRec();
 };
