@@ -23,4 +23,8 @@ void Enemy::tick(float deltaTime) {
    // get to target
    m_velocity = Vector2Subtract(m_target->getScreenPos(), getScreenPos());
    BaseCharacter::tick(deltaTime);
+   
+   if (CheckCollisionRecs(m_target->getCollisionRec(), getCollisionRec())) {
+      m_target->takeDamage(m_damagePerSec * deltaTime); // * deltaTime to get the exactly amount of damage we need for a single frame, which will be equivalente to 10 damage per second
+   }
 }

@@ -20,6 +20,7 @@ public:
    Rectangle getWeaponCollisionRec() const { return m_weaponCollisionRec; }
    float getHealth() const { return m_health; }
    
+   void takeDamage(float damage);
    virtual void tick(float deltaTime);
 };
 #endif // !CHARACTER_H

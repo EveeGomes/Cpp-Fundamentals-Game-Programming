@@ -8,6 +8,7 @@
 
 class Enemy : public BaseCharacter {
    Character* m_target{};
+   float m_damagePerSec = 10.f;
 public:
    Enemy();
    Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture);
